@@ -1019,8 +1019,12 @@ scaleY
 				<button type="button" class="switcher switcher-signup">
 					Sign Up <span class="underline"></span>
 				</button>
+				
+				
+				
+				
 				<form class="form form-signup" method="post"
-					action="<c:url value='/_01_tr_register/Train_RegisterServletMP_new.do'  />"
+					action="<c:url value='/Train_RegisterServletMP_new.do'  />"
 					enctype="multipart/form-data">
 					<fieldset>
 						<legend> Please, enter your email, password and password
@@ -1154,7 +1158,7 @@ scaleY
        // 找到 select 標籤
        var gymList = document.getElementById("gymList");
 
-      // 開始尋找健身房資料的servlet去抓資料，會返回一個promise(承諾)
+//       開始尋找健身房資料的servlet去抓資料，會返回一個promise(承諾)
        axios.get("/trainme/Gymlist")
        .then(function (res) {   //若有抓到資料則執行這個function
          var gyms = res.data; // gyms 為一個物件陣列

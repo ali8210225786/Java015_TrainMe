@@ -40,12 +40,12 @@ import model.GymBean;
 @MultipartConfig(location = "", fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 1024 * 1024
 		* 500, maxRequestSize = 1024 * 1024 * 500 * 5)
 
-@WebServlet("/_01_tr_register/Train_RegisterServletMP_new.do")
+@WebServlet("/Train_RegisterServletMP_new.do")
 
 public class Train_RegisterServletMP_new extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// 設定密碼欄位必須由大寫字母、小寫字母、數字與 !@#$%!^'" 等四組資料組合而成，且長度不能小於八個字元
+	// 設定密碼欄位必須由小寫字母、數字資料組合而成，且長度不能小於六個字元
 	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z]).{6,})";
 	private Pattern patternPsw = null;
 	private Matcher matcherPsw = null;
@@ -59,8 +59,7 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
-//		JavaMailer javaMailer = new JavaMailer();
-//		javaMailer.sendMail("test@gmail.com", "嗨嗨", "<h1>嗨嗨嗨</h1>");
+
 		
 		
 		request.setCharacterEncoding("UTF-8"); // 文字資料轉內碼
@@ -83,7 +82,6 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 		String passwordcheck = "";
 		String id = "";
 		String sex = "";
-		Integer year = null;
 		Integer gymId = null;
 		Integer gympassword = null;
 		String myHash = "";
@@ -105,11 +103,11 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 
 				// 1. 讀取使用者輸入資料，進行必要的資料轉換
 				if (p.getContentType() == null) {
-					if (fldName.equals("name")) {
+					if (fldName.equals("tr_name")) {
 						name = value;
-					} else if (fldName.equals("phone")) {
+					} else if (fldName.equals("tr_phone")) {
 						phone = value;
-					} else if (fldName.equals("birthday")) {
+					} else if (fldName.equals("tr_birthday")) {
 						try {
 							SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 							java.util.Date date = simpleDateFormat.parse(value);
@@ -118,23 +116,21 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}
-					} else if (fldName.equals("email")) {
+					} else if (fldName.equals("tr_email")) {
 						email = value;
-					} else if (fldName.equals("password")) {
+					} else if (fldName.equals("tr_password")) {
 						password = value;
-					} else if (fldName.equals("passwordcheck")) {
+					} else if (fldName.equals("tr_passwordcheck")) {
 						passwordcheck = value;
-					} else if (fldName.equals("id")) {
+					} else if (fldName.equals("tr_id")) {
 						id = value;
-					} else if (fldName.equals("sex")) {
+					} else if (fldName.equals("tr_sex")) {
 						sex = value;
-					} else if (fldName.equals("year")) {
-						year = Integer.valueOf(value);
-					} else if (fldName.equals("gymId")) {
+					}  else if (fldName.equals("gymId")) {
 //						gymId =  value;
 						gymId =  Integer.valueOf(value);
 						
-					} else if (fldName.equals("verification")) {
+					} else if (fldName.equals("gympassword")) {
 						gympassword = Integer.valueOf(value);
 					}
 
@@ -171,20 +167,20 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 				patternPsw = Pattern.compile(PASSWORD_PATTERN);
 				matcherPsw = patternPsw.matcher(password);
 				if (!matcherPsw.matches()) {
-					errorMsg.put("passwordError", "密碼至少含有一個小寫字母、數字與組合而成，且長度不能小於六個字元");
+					errorMsg.put("tr_passwordError", "密碼至少含有一個小寫字母、且長度不能小於六個字元");
 				}
 
 				// 檢查Email格式
 				patternMail = Pattern.compile(Email_PATTERN);
 				matcherMail = patternMail.matcher(email);
 				if (!matcherMail.matches()) {
-					errorMsg.put("emailError", "Email欄位必須包含@符號，必須包含點，點和@之間必須有字元");
+					errorMsg.put("tr_emailError", "必須包含@符號，必須包含點，點和@之間必須有字元");
 					
 				}
 
 				// 檢查密碼欄位和密碼確認欄位是否一致
 				if (!password.equals(passwordcheck)) {
-					errorMsg.put("passwordCheckError", "密碼欄位並須和密碼確認一致");
+					errorMsg.put("tr_passwordCheckError", "密碼欄位並須和密碼確認一致");
 				}
 			}
 			
@@ -197,14 +193,17 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 			
 			try {
 				MemberService service = new MemberServiceImpl();
+				
+				// 檢查信箱是否已經存在
 				if (service.idExists(email)) {
-					errorMsg.put("emailExists", "此信箱已存在，請換新信箱");
+					errorMsg.put("tr_emailExists", "此信箱已存在，請換新信箱");
 					errorResponse(request, response, errorMsg);
 					return;
 				}
 				
+				// 檢查健身房驗證碼是否正確
 				if(service.checkverification(gymId) != gympassword) {
-					errorMsg.put("errorverification", "驗證碼錯誤");
+					errorMsg.put("tr_errorverification", "驗證碼錯誤");
 					errorResponse(request, response, errorMsg);
 					return;
 				}
@@ -212,8 +211,8 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 
 
 					// 將所有會員資料封裝到StudentBean(類別的)物件
-					TrainerBean trainer = new TrainerBean(null, null, name, phone, email, birthday, password, id, sex, year, gymId, null, null, myHash);
-					// 呼叫StudentService的saveStudent方法
+					TrainerBean trainer = new TrainerBean(null, null, name, phone, email, birthday, password, id, sex, gymId, null, null, myHash);
+					// 呼叫StudentService的saveTrainer方法
 					int n = service.saveTrainer(trainer);
 					if (n == 1) {
 						SendingEmail se = new SendingEmail(2,email, myHash);
@@ -230,6 +229,8 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 				
 
 				// 5.依照 Business Logic 運算結果來挑選適當的畫面
+					
+				// 若有錯誤訊息	
 				if (!errorMsg.isEmpty()) {
 					errorResponse(request, response, errorMsg);
 					return;
@@ -242,11 +243,12 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 			}
 		}
 	}
-
+	
+	// 當有錯誤時的處理
 	private void errorResponse(HttpServletRequest request, HttpServletResponse response, Map<String, String> errorMsg)
 			throws ServletException, IOException {
-		errorMsg.put("from", "signUp");
-		RequestDispatcher rd = request.getRequestDispatcher("/_02_login/tr-login.jsp");
+		errorMsg.put("from", "tr_signUp");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);
 	}
 

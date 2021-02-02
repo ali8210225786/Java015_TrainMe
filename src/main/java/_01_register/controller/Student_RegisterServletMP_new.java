@@ -32,12 +32,12 @@ import mail.SendingEmail;
 @MultipartConfig(location = "", fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 1024 * 1024
 		* 500, maxRequestSize = 1024 * 1024 * 500 * 5)
 
-@WebServlet("/dmot/_01_tr_register/Student_RegisterServletMP_new.do")
+@WebServlet("/Student_RegisterServletMP_new.do")
 
 public class Student_RegisterServletMP_new extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// 設定密碼欄位必須由大寫字母、小寫字母、數字與 !@#$%!^'" 等四組資料組合而成，且長度不能小於八個字元
+	// 設定密碼欄位必須由小寫字母、數字資料組合而成，且長度不能小於六個字元
 	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z]).{6,})";
 	private Pattern patternPsw = null;
 	private Matcher matcherPsw = null;
@@ -48,9 +48,6 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 	private Matcher matcherMail = null;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
-//		JavaMailer javaMailer = new JavaMailer();
-//		javaMailer.sendMail("test@gmail.com", "嗨嗨", "<h1>嗨嗨嗨</h1>");
 		
 		
 		request.setCharacterEncoding("UTF-8"); // 文字資料轉內碼
@@ -91,11 +88,11 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 
 				// 1. 讀取使用者輸入資料，進行必要的資料轉換
 				if (p.getContentType() == null) {
-					if (fldName.equals("name")) {
+					if (fldName.equals("st_name")) {
 						name = value;
-					} else if (fldName.equals("phone")) {
+					} else if (fldName.equals("st_phone")) {
 						phone = value;
-					} else if (fldName.equals("birthday")) {
+					} else if (fldName.equals("st_birthday")) {
 						try {
 							SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 							java.util.Date date = simpleDateFormat.parse(value);
@@ -104,15 +101,15 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}
-					} else if (fldName.equals("email")) {
+					} else if (fldName.equals("st_email")) {
 						email = value;
-					} else if (fldName.equals("password")) {
+					} else if (fldName.equals("st_password")) {
 						password = value;
-					} else if (fldName.equals("passwordcheck")) {
+					} else if (fldName.equals("st_passwordcheck")) {
 						passwordcheck = value;
-					} else if (fldName.equals("id")) {
+					} else if (fldName.equals("st_id")) {
 						id = value;
-					} else if (fldName.equals("sex")) {
+					} else if (fldName.equals("st_sex")) {
 						sex = value;
 					}
 
@@ -148,19 +145,19 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 				patternPsw = Pattern.compile(PASSWORD_PATTERN);
 				matcherPsw = patternPsw.matcher(password);
 				if (!matcherPsw.matches()) {
-					errorMsg.put("passwordError", "密碼至少含有一個小寫字母、數字與組合而成，且長度不能小於六個字元");
+					errorMsg.put("st_passwordError", "密碼至少含有一個小寫字母，且長度不能小於六個字元");
 				}
 
 				// 檢查Email格式
 				patternMail = Pattern.compile(Email_PATTERN);
 				matcherMail = patternMail.matcher(email);
 				if (!matcherMail.matches()) {
-					errorMsg.put("emailError", "Email欄位必須包含@符號，必須包含點，點和@之間必須有字元");
+					errorMsg.put("st_emailError", "必須包含@符號，必須包含點，點和@之間必須有字元");
 				}
 
 				// 檢查密碼欄位和密碼確認欄位是否一致
 				if (!password.equals(passwordcheck)) {
-					errorMsg.put("passwordCheckError", "密碼欄位並須和密碼確認一致");
+					errorMsg.put("st_passwordCheckError", "密碼欄位並須和密碼確認一致");
 				}
 			}
 			// 如果有錯誤
@@ -169,13 +166,11 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 				return;
 			}
 			try {
-				// 4. 產生StudentService物件，以便進行Business Logic運算
-				// StudentServiceImpl類別的功能：
-				// 1.檢查信箱是否已經存在，已存在的信箱不能使用，回傳相關訊息通知使用者修改
-				// 2.若無問題，儲存會員的資料
 				MemberService service = new MemberServiceImpl();
+				
+		
 				if (service.idExists(email)) {
-					errorMsg.put("errorIdDup", "此信箱已存在，請換新信箱");
+					errorMsg.put("st_errorIdDup", "此信箱已存在，請換新信箱");
 				} else {
 
 //=============================================================================================密碼加密					
@@ -187,7 +182,7 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 					// 將所有會員資料封裝到StudentBean(類別的)物件
 
 					
-//					StudentBean	stdent = new StudentBean(null, null, name, phone, email, birthday, passwordcheck, id, sex, null, null,myHash);
+
 					StudentBean stdent = new StudentBean(null, null, name, phone, email, birthday, password, id, sex, null, null, myHash);
 					
 					// 呼叫StudentService的saveStudent方法
@@ -197,7 +192,7 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 						SendingEmail se = new SendingEmail(1 ,email, myHash);
 						se.sendMail();
 						msgOK.put("InsertOK", "<Font color='red'>新增成功，請開始使用本系統</Font>");
-						response.sendRedirect("/dmot/_01_tr_register/register_success.jsp");
+						response.sendRedirect("/trainme/_02_login/login_success.jsp");
 						return;
 					} else {
 						errorMsg.put("errorIdDup", "新增此筆資料有誤(RegisterServlet)");
@@ -205,6 +200,8 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 				}
 
 				// 5.依照 Business Logic 運算結果來挑選適當的畫面
+				
+				// 若有錯誤訊息	
 				if (!errorMsg.isEmpty()) {
 					errorResponse(request, response, errorMsg);
 					return;
@@ -218,10 +215,11 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 		}
 	}
 
+	// 當有錯誤時的處理
 	private void errorResponse(HttpServletRequest request, HttpServletResponse response, Map<String, String> errorMsg)
 			throws ServletException, IOException {
-		errorMsg.put("from", "signUp");
-		RequestDispatcher rd = request.getRequestDispatcher("/_02_login\\st-login.jsp");
+		errorMsg.put("from", "st_signUp");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);
 	}
 

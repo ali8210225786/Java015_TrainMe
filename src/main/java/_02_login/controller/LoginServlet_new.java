@@ -21,7 +21,7 @@ import _01_register.service.MemberService;
 import _01_register.service.impl.MemberServiceImpl;
 import mail.MailDao;
 
-@WebServlet("/_02_login/tr-login.do")
+@WebServlet("/tr-login.do")
 public class LoginServlet_new extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,10 +34,10 @@ public class LoginServlet_new extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		// 定義存放錯誤訊息的Map物件
-		Map<String, String> errorMsgMap = new HashMap<String, String>();
+		Map<String, String> errorMsg = new HashMap<String, String>();
 
-		// 將errorMsgMap放入request物件內，識別字串為 "ErrorMsgKey"
-		request.setAttribute("ErrorMsgKey", errorMsgMap);
+		// 將errorMsgMap放入request物件內，識別字串為 "MsgMap"
+		request.setAttribute("MsgMap", errorMsg);
 		// 1. 讀取使用者輸入資料
 		String email = request.getParameter("lgEmail");
 		String password = request.getParameter("pswd");
@@ -47,16 +47,16 @@ public class LoginServlet_new extends HttpServlet {
 		// 3. 檢查使用者輸入資料
 		// 如果 userId 欄位為空白，放一個錯誤訊息到 errorMsgMap 之內
 		if (!isValid(email)) {
-			errorMsgMap.put("EmailEmptyError", "信箱必須輸入");
+			errorMsg.put("EmailEmptyError", "信箱必須輸入");
 		}
 		// 如果 password 欄位為空白，放一個錯誤訊息到 errorMsgMap 之內
 		if (!isValid(password)) {
-			errorMsgMap.put("PasswordEmptyError", "密碼欄必須輸入");
+			errorMsg.put("PasswordEmptyError", "密碼欄必須輸入");
 		}
 
 		// 如果 errorMsgMap 不是空的，表示有錯誤，交棒給login.jsp
-		if (!errorMsgMap.isEmpty()) {
-			errorResponse(request, response, errorMsgMap);
+		if (!errorMsg.isEmpty()) {
+			errorResponse(request, response, errorMsg);
 			return;
 		}
 
@@ -81,8 +81,8 @@ public class LoginServlet_new extends HttpServlet {
 						response.sendRedirect("/trainme/_02_login/login_success.jsp");
 						return;	
 					}else {
-						errorMsgMap.put("noPass", "帳號尚未通過信箱驗證唷~");
-						errorResponse(request, response, errorMsgMap);
+						errorMsg.put("noPass", "帳號尚未通過信箱驗證唷~");
+						errorResponse(request, response, errorMsg);
 						return;
 						
 					}
@@ -94,13 +94,13 @@ public class LoginServlet_new extends HttpServlet {
 			}
 
 			// NG, 登入失敗, userid與密碼的組合錯誤，放相關的錯誤訊息到 errorMsgMap 之內
-			errorMsgMap.put("LoginError", "該帳號不存在或密碼錯誤");
-			errorResponse(request, response, errorMsgMap);
+			errorMsg.put("LoginError", "該帳號不存在或密碼錯誤");
+			errorResponse(request, response, errorMsg);
 			return;
 
 		} catch (RuntimeException ex) {
-			errorMsgMap.put("LoginError", ex.getMessage());
-			errorResponse(request, response, errorMsgMap);
+			errorMsg.put("LoginError", ex.getMessage());
+			errorResponse(request, response, errorMsg);
 			return;
 		}
 
@@ -108,9 +108,9 @@ public class LoginServlet_new extends HttpServlet {
 
 	// 有錯誤時，回傳回原本頁面
 	private void errorResponse(HttpServletRequest request, HttpServletResponse response,
-			Map<String, String> errorMsgMap) throws ServletException, IOException {
-		errorMsgMap.put("from", "logIn");
-		RequestDispatcher rd = request.getRequestDispatcher("/_02_login\\st-login.jsp");
+			Map<String, String> errorMsg) throws ServletException, IOException {
+		errorMsg.put("from", "logIn");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);
 	}
 }

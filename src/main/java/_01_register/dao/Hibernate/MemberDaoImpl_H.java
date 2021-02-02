@@ -140,10 +140,10 @@ public class MemberDaoImpl_H implements MemberDao_H {
 	
 
 
-	@Override
-	public List<StudentBean_H> listAll_H() {
-		StudentBean sb = null;
-		List<StudentBean_H> list = new ArrayList<StudentBean_H>();
+//	@Override
+//	public List<StudentBean_H> listAll_H() {
+//		StudentBean sb = null;
+//		List<StudentBean_H> list = new ArrayList<StudentBean_H>();
 //		String sql = "SELECT * FROM student;";
 //		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 //
@@ -166,39 +166,30 @@ public class MemberDaoImpl_H implements MemberDao_H {
 //			ex.printStackTrace();
 //			throw new RuntimeException("MemberDaoImpl_Jdbc類別#checkIDPassword()發生SQL例外: " + ex.getMessage());
 //		}
-		return list;
-	}
+//		return list;
+//	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<GymBean_H> gymList_H() {
-		GymBean gb = null;
+		
 		List<GymBean_H> gyms = new ArrayList<GymBean_H>();
-//		String sql = "SELECT * FROM gym;";
-//		
-//		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-//
-//			try (ResultSet rs = ps.executeQuery();) {
-//				while (rs.next()) {
-//					gb = new GymBean();
-//					gb.setId(rs.getInt("id"));
-//					gb.setName(rs.getString("name"));
-//					gb.setPhone(rs.getString("phone"));
-//					gb.setAddress(rs.getString("address"));
-//					gb.setVerification(rs.getInt("verification"));
-//					
-//					gyms.add(gb);
-//				}
-//			}
-//		} catch (SQLException ex) {
-//			ex.printStackTrace();
-//			throw new RuntimeException("MemberDaoImpl_Jdbc類別#gymList()發生SQL例外: " + ex.getMessage());
-//		}
+		Session session = factory.getCurrentSession();
+		String hql = "FROM GymBean_H";
+			
+		
+		gyms = session.createQuery(hql).getResultList();
+	
 		return gyms;
 	}
 //=========================================================================
 	@Override
 	public int checkverification_H(int gymId) {
 		int verification = 0;
+		
+		Session session = factory.getCurrentSession();
+		String hql = "FROM GymBean_H  WHERE id = gId";
+		
 //		String sql = "SELECT verification FROM gym WHERE id = ?";
 //		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
 //			ps.setInt(1, gymId);
@@ -217,6 +208,12 @@ public class MemberDaoImpl_H implements MemberDao_H {
 //			throw new RuntimeException("StudentDaoImpl_Jdbc類別#checkverification()發生例外: " + ex.getMessage());
 //		}
 		return verification;
+	}
+
+	@Override
+	public List<StudentBean_H> listAll_H() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

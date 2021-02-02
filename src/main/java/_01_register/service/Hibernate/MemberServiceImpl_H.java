@@ -1,7 +1,6 @@
 package _01_register.service.Hibernate;
 
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -17,7 +16,7 @@ import model.GymBean;
 import model.Hibernate.GymBean_H;
 
 public class MemberServiceImpl_H implements MemberService_H {
-	
+
 	SessionFactory factory;
 	MemberDaoImpl_H dao;
 
@@ -25,7 +24,6 @@ public class MemberServiceImpl_H implements MemberService_H {
 		this.dao = new MemberDaoImpl_H();
 		factory = HibernateUtils.getSessionFactory();
 	}
-
 
 	@Override
 	public int saveStudent_H(StudentBean_H sb) {
@@ -45,10 +43,10 @@ public class MemberServiceImpl_H implements MemberService_H {
 		}
 		return n;
 	}
-	
+
 	@Override
 	public int saveTrainer_H(TrainerBean_H tr) {
-		
+
 		int n = 0;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
@@ -67,13 +65,13 @@ public class MemberServiceImpl_H implements MemberService_H {
 	}
 
 	@Override
-	public boolean idExists_H(int type,String email) {
+	public boolean idExists_H(int type, String email) {
 		boolean exist = false;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			exist = dao.idExists_H(type,email);
+			exist = dao.idExists_H(type, email);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
@@ -83,7 +81,7 @@ public class MemberServiceImpl_H implements MemberService_H {
 			throw new RuntimeException(e);
 		}
 		return exist;
-	
+
 	}
 
 //	@Override
@@ -91,8 +89,6 @@ public class MemberServiceImpl_H implements MemberService_H {
 //		// TODO Auto-generated method stub
 //		
 //	}
-
-
 
 	@Override
 	public MemberBean_H checkIdPassword_H(String email, String password) {
@@ -114,36 +110,49 @@ public class MemberServiceImpl_H implements MemberService_H {
 		}
 		return mb;
 	}
-		
-	
 
 	@Override
 	public List<StudentBean_H> listAll_H() {
-		
+
 		return dao.listAll_H();
 	}
 
 	@Override
 	public List<GymBean_H> gymList_H() {
+		List<GymBean_H> gyms = new ArrayList<GymBean_H>();
+
+		Session session = factory.getCurrentSession();
+		Transaction tx = null;
+
 		
-		return dao.gymList_H();
+			try {
+				tx = session.beginTransaction();
+				gyms = dao.gymList_H();
+				tx.commit();
+			} catch (Exception e) {
+				if (tx != null) {
+					tx.rollback();
+				}
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			return gyms;
+
+		
+
 	}
 
 	@Override
 	public int checkverification_H(int gymId) {
-		
+
 		return dao.checkverification_H(gymId);
 	}
-
 
 	@Override
 	public MemberBean_H queryStudent_H(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	
 
 //	@Override
 //	public StudentBean queryMember(String id) {

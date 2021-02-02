@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import _01_register.service.MemberService;
+import _01_register.service.Hibernate.MemberServiceImpl_H;
+import _01_register.service.Hibernate.MemberService_H;
 import _01_register.service.impl.MemberServiceImpl;
 import model.GymBean;
+import model.Hibernate.GymBean_H;
 
 
 @WebServlet("/Gymlist")

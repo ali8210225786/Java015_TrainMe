@@ -65,8 +65,8 @@ public class MemberDaoImpl_Jdbc implements MemberDao {
 	@Override
 	public int saveTrainer(TrainerBean tr) {
 		String sql = "insert into trainer " + " (id, name, phone, birthday, "
-				+ " email,  password, id_number, sex, year, gym_id, hash)"
-				+ " values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " email,  password, id_number, sex,  gym_id, hash)"
+				+ " values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int n = 0;
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 
@@ -77,9 +77,8 @@ public class MemberDaoImpl_Jdbc implements MemberDao {
 			ps.setString(5, tr.getPassword());
 			ps.setString(6, tr.getId());
 			ps.setString(7, tr.getSex());
-			ps.setInt(8, tr.getYear());
-			ps.setInt(9, tr.getGymId());
-			ps.setString(10, tr.getMyHash());
+			ps.setInt(8, tr.getGymId());
+			ps.setString(9, tr.getMyHash());
 
 			n = ps.executeUpdate();
 		} catch (Exception ex) {

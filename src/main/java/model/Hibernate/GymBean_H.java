@@ -15,7 +15,7 @@ public class GymBean_H {
 	String name;
 	String address;
 	String phone;
-	Integer verification; //≈Á√“ΩX
+	Integer verification; 
 	
 	public GymBean_H(Integer id, String name, String address, String phone, Integer verification) {
 		super();

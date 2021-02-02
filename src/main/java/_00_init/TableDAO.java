@@ -35,7 +35,7 @@ public class TableDAO {
 		String sql = "insert into city values(null, ?)";
 		int result = -1;
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);
-				BufferedReader br = new BufferedReader(new FileReader("C:\\Java015-Trainme\\Trainme\\data\\city.csv"));) {
+				BufferedReader br = new BufferedReader(new FileReader("C:\\_Java015-TrainMe\\_workspace_Test\\Trainme\\data\\area.csv"));) {
 			String line = "";
 			int count = 0;
 			

@@ -48,7 +48,7 @@ public class SendingEmail {
 			message.setSubject("Email Verification Link");
 			// 設定信件內容
 			message.setText("Click this link to confirm your email address and complete setup for your account."
-					+ "\n\nVerification Link: " + "http://localhost:9090/trainme/ActivateAccount?key=" + type + "&key1=" + userEmail + "&key2=" + myHash);
+					+ "\n\nVerification Link: " + "http://localhost:8081/trainme/ActivateAccount?key=" + type + "&key1=" + userEmail + "&key2=" + myHash);
 			
 			Transport.send(message);
 			
