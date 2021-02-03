@@ -82,16 +82,26 @@
     </label>
 
         <div class="memberDataBox">
+        
+        	<div class="stData">
+                <p>姓名 :  <label>${LoginOK.name}</label></p>
+                <p>Email : <label>${LoginOK.email}</label></p>
+                <p>密碼 :  <label><a href="">修改密碼</a></label></p>
+                <p>生日 :  <label>${LoginOK.birth}</label></p>
+            </div>
+        
+        
             <!-- 表單內有夾帶檔案要使用，enctype="multipart/form-data" 要求不進行URL編碼，避免破壞檔案組成結構 -->
-            <form action="" method="post" class="memberDataForm" enctype="multipart/form-data">
+            <form action="/trainme/St_accountSet" method="post" class="memberDataForm" enctype="multipart/form-data">
+            																		
 
                     <div class="memberDataBox">
                         <div class="memberDataLabel"><label for="txt_nickname">暱 稱：</label></div>
-                        <div class="mdiDiv"><input type="text" class="mdiInput" id="txt_nickname"  /></div>
+                        <div class="mdiDiv"><input type="text" class="mdiInput" id="txt_nickname" value="${LoginOK.nickname}" /></div>
                     </div>
                     <div class="memberDataBox">
                         <div class="memberDataLabel"> <label for="txt_phone">電 話：</label></div>
-                        <div class="mdiDiv"> <input type="text" class="mdiInput"  id="txt_phone" required="required" /></div>
+                        <div class="mdiDiv"> <input type="text" class="mdiInput"  id="txt_phone" required="required" value="${LoginOK.phone}" /></div>
                     </div>
                     
                     <div class="memberDataBox">
@@ -103,11 +113,11 @@
                              <select name="area" id="area" class="mdiInput" style="width: 80px; height: 28px;" >
                               
                             </select>
-                            <input type="text" class="mdiInput"  id="txt_add"   />
+                            <input type="text" class="mdiInput"  id="txt_add" value="${LoginOK.address}"  />
                         </div>
                     </div>
                    
-                    
+                         <button type="submit">傳送</button> 
                     <input type="submit" id="submitBt" />
                    
             </form>
@@ -168,7 +178,9 @@
 		
         var areaList = document.getElementById('area');
         if(areaList.firstChild){
-            areaList.removeChild(areaList.firstChild);
+//        		 console.log(areaList.firstChild);
+//             areaList.removeChild(areaList.firstChild);
+        	areaList.innerHTML = "";
         }
 
         axios.get("/trainme/AreaList", {

@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 import _01_register.service.MemberService;
 import _01_register.service.impl.MemberServiceImpl;
-import _03_memberData.model.MemDataDao;
+import _03_memberData.dao.MemDataDao;
 import model.CityBean;
 import model.GymBean;
 

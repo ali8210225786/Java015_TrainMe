@@ -1,4 +1,4 @@
-package _03_memberData.model;
+package _03_memberData.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,29 +9,32 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.annotation.MultipartConfig;
 import javax.sql.DataSource;
 
 import _00_init.util.DBService;
+import _01_register.model.StudentBean;
 import model.AreaBean;
 import model.CityBean;
 import model.GymBean;
 import model.Hibernate.City;
 
+@MultipartConfig(location = "", fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 1024 * 1024
+* 500, maxRequestSize = 1024 * 1024 * 500 * 5)
 public class MemDataDao {
 	DataSource ds = null;
 
 	public MemDataDao() {
-		
+
 		System.out.println("DBService.JNDI_DB_NAME=" + DBService.JNDI_DB_NAME);
 		try {
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup(DBService.JNDI_DB_NAME);
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl_JdbcÃþ§O#«Øºc¤lµo¥Í¨Ò¥~: " + ex.getMessage());
+			throw new RuntimeException("MemDataDao ç™¼ç”ŸéŒ¯èª¤: " + ex.getMessage());
 		}
 	}
-	
 
 	public List<CityBean> cityList() {
 		CityBean city = null;
@@ -46,26 +49,25 @@ public class MemDataDao {
 					city.setId(rs.getInt("id"));
 					city.setName(rs.getString("name"));
 
-
 					citys.add(city);
 				}
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("MemDataDaoÃþ§O#cityList()µo¥ÍSQL¨Ò¥~: " + ex.getMessage());
+			throw new RuntimeException("MemDataDaoé¡žåˆ¥çš„#cityList()ç™¼ç”ŸSQLéŒ¯èª¤: " + ex.getMessage());
 		}
 		return citys;
 	}
-	
+
 	public List<AreaBean> areaList(int city_id) {
 		AreaBean area = null;
 		List<AreaBean> areas = new ArrayList<AreaBean>();
 		String sql = "SELECT * FROM area WHERE city_id = ?;";
 
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-			
-				ps.setInt(1, city_id);
-				
+
+			ps.setInt(1, city_id);
+
 			try (ResultSet rs = ps.executeQuery();) {
 				while (rs.next()) {
 					area = new AreaBean();
@@ -73,15 +75,36 @@ public class MemDataDao {
 					area.setName(rs.getString("name"));
 					area.setCity_id(rs.getInt("city_id"));
 
-
 					areas.add(area);
 				}
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("MemDataDaoÃþ§O#areaList()µo¥ÍSQL¨Ò¥~: " + ex.getMessage());
+			throw new RuntimeException("MemDataDaoé¡žåˆ¥çš„#areaList()ç™¼ç”ŸSQLéŒ¯èª¤:" + ex.getMessage());
 		}
 		return areas;
 	}
-	
+
+	public int updateStudentData(StudentBean sb) {
+		int i = 0;
+		String sql1 = "UPDATE  student "
+				+ " SET city_idt =  ?  , area_id = ? , address = ? , nickname = ? , profile_image = ?"
+				+ " WHERE memberId = ?";
+
+		try (Connection conn = ds.getConnection(); PreparedStatement ps1 = conn.prepareStatement(sql1);) {
+			ps1.setInt(1, sb.getCity_id());
+			ps1.setInt(2, sb.getArea_id());
+			ps1.setString(3,  sb.getAddress());
+			ps1.setString(4,  sb.getNickname());
+			ps1.setString(5,  sb.getPhoto());
+			ps1.executeUpdate();
+			i = 1;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("MemberDaoImpl_Jdbcé¡žåˆ¥#updateUnpaidOrderAmount()ç™¼ç”ŸSQLä¾‹å¤–: " + ex.getMessage());
+		}
+		return i;
+
+	}
+
 }

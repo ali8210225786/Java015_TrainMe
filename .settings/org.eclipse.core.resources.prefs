@@ -1,6 +1,4 @@
 eclipse.preferences.version=1
-encoding//data/area.csv=UTF-8
-encoding//data/area_new.csv=UTF-8
 encoding//src/main/java/_00_init=UTF-8
 encoding//src/main/java/_01_register=UTF-8
 encoding//src/main/java/_01_register/controller/H_Train_RegisterServletMP_Hibernate.java=UTF-8

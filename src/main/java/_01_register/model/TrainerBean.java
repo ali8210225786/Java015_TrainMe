@@ -28,6 +28,22 @@ public class TrainerBean extends MemberBean {
 	Integer is_delete;
 	String myHash;
 	
+// =======================
+	
+	Integer year;
+	Integer city_id;
+	Integer area_id;
+	String address;
+	String photo;
+	String nickname;
+	String bank_account;
+	String course;
+	String introduction;
+	
+	
+//=========================
+	
+	
 	
 	
 	
@@ -138,6 +154,96 @@ public class TrainerBean extends MemberBean {
 
 	public void setMyHash(String myHash) {
 		this.myHash = myHash;
+	}
+
+
+	public Integer getYear() {
+		return year;
+	}
+
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+
+	public Integer getCity_id() {
+		return city_id;
+	}
+
+
+	public void setCity_id(Integer city_id) {
+		this.city_id = city_id;
+	}
+
+
+	public Integer getArea_id() {
+		return area_id;
+	}
+
+
+	public void setArea_id(Integer area_id) {
+		this.area_id = area_id;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
+	public String getBank_account() {
+		return bank_account;
+	}
+
+
+	public void setBank_account(String bank_account) {
+		this.bank_account = bank_account;
+	}
+
+
+	public String getCourse() {
+		return course;
+	}
+
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 	
 	

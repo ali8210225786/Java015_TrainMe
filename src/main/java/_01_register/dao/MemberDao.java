@@ -28,6 +28,8 @@ public interface MemberDao {
 	public MemberBean checkIdPassword(String email, String password);	
 	
 
+	public StudentBean selectStudent(String email);
+	public TrainerBean selectTrainer(String email);
 	
 	public List<StudentBean> listAll() ;
 	

@@ -35,10 +35,10 @@ public class TableDAO {
 		String sql = "insert into city values(null, ?)";
 		int result = -1;
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);
-				BufferedReader br = new BufferedReader(new FileReader("C:\\_Java015-TrainMe\\_workspace_Test\\Trainme\\data\\area.csv"));) {
+				BufferedReader br = new BufferedReader(new FileReader(""));) {
 			String line = "";
 			int count = 0;
-			
+				
 			while ((line = br.readLine()) != null) {
 				if (line.startsWith(UTF8_BOM)) {
 					line = line.substring(1);
@@ -67,7 +67,7 @@ public class TableDAO {
 		String sql = "insert into area values(null, ?, ?)";
 		int result = -1;
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);
-				BufferedReader br = new BufferedReader(new FileReader("C:\\Java015-Trainme\\Trainme\\data\\area.csv"));) {
+				BufferedReader br = new BufferedReader(new FileReader("C:\\_Java015-TrainMe\\_workspace_Test\\Trainme\\data\\area1.csv"));) {
 			String line = "";
 			int count = 0;
 			

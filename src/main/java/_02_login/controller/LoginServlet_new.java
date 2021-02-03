@@ -67,18 +67,40 @@ public class LoginServlet_new extends HttpServlet {
 // 		將密碼加密兩次，以便與存放在表格內的密碼比對
 //		password = GlobalService.getMD5Endocing(GlobalService.encryptString(password));
 		MemberBean mb = null;
+		StudentBean sb = null;
+		TrainerBean tb = null;
 		try {
 			// 判斷帳號密碼是否存在
 			mb = service.checkIdPassword(email, password);
+			
+			
+			
+			
+			
 			// 若有找到帳號密碼
 			if (mb != null) {
 				
 				//判斷會員類別
+				
 				if (mb instanceof TrainerBean | mb instanceof StudentBean) {
-					if (mail.checkPass(2, email)) {
+					int type =( mb instanceof TrainerBean )?  2 : 1;
+					
+					if (mail.checkPass(type, email)) {
 						
-						session.setAttribute("LoginOK", mb);
-						response.sendRedirect("/trainme/_02_login/login_success.jsp");
+						
+					// 學生 - 跳轉頁面
+						if(type == 1) {			
+							
+							sb = service.selectStudent(email);
+							session.setAttribute("LoginOK", sb);
+							response.sendRedirect("/trainme/loginAfter.jsp");							
+						}
+					// 教練 - 跳轉頁面
+						if(type == 2) {
+//							tb = (TrainerBean) mb;
+							session.setAttribute("LoginOK", tb);
+							response.sendRedirect("/trainme/loginAfter.jsp");
+						}
 						return;	
 					}else {
 						errorMsg.put("noPass", "帳號尚未通過信箱驗證唷~");
@@ -87,6 +109,9 @@ public class LoginServlet_new extends HttpServlet {
 						
 					}
 				}
+				
+				
+				
 				// 是否以經過信箱驗證
 
 				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"

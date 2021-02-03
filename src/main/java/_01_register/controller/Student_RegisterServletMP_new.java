@@ -184,7 +184,7 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 					
 
 					StudentBean stdent = new StudentBean(null, null, name, phone, email, birthday, password, id, sex, null, null, myHash);
-					
+				
 					// 呼叫StudentService的saveStudent方法
 					int n = service.saveStudent(stdent);
 					if (n == 1) {

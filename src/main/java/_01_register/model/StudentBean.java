@@ -19,6 +19,7 @@ public class StudentBean extends MemberBean  {
 	Integer is_delete;
 	String myHash;
 //	======================個人資料
+	Integer city_id;
 	Integer area_id;
 	String address;
 	Double heigth;
@@ -45,7 +46,8 @@ public class StudentBean extends MemberBean  {
 		this.is_delete = is_delete;
 		this.myHash = myHash;
 	}
-
+	
+	
 
 	public StudentBean() {
 		
@@ -174,11 +176,24 @@ public class StudentBean extends MemberBean  {
 	
 //=======================================
 	
+	
+	
+	
+	
+	
+	public Integer getCity_id() {
+		return city_id;
+	}
+
+
+	public void setCity_id(Integer city_id) {
+		this.city_id = city_id;
+	}
+
 	public Integer getArea_id() {
 		return area_id;
 	}
-	
-	
+
 	public void setArea_id(Integer area_id) {
 		this.area_id = area_id;
 	}
