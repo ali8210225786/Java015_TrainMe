@@ -118,6 +118,35 @@ public class MemberDaoImpl_Jdbc implements MemberDao {
 		
 		return exist;
 	}
+	
+	
+	@Override
+	public boolean idNumberExists(String idNumber) {
+		boolean exist = false;
+		String[] types = { "student", "trainer" };
+
+		for (int i = 0; i < types.length; i++) {
+
+			String sql = "SELECT * FROM " + types[i] + " WHERE id_number = ? ";
+			try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+				ps.setString(1, idNumber);
+
+				try (ResultSet rs = ps.executeQuery();) {
+					if (rs.next()) {
+						exist = true;
+					}
+				}
+			}
+
+			catch (SQLException ex) {
+				ex.printStackTrace();
+				throw new RuntimeException("StudentDaoImpl_Jdbc類別#idNumberExists()發生例外: " + ex.getMessage());
+			}
+		}
+		
+		
+		return exist;
+	}
 
 	// 由參數 id (會員帳號) 到Member表格中 取得某個會員的所有資料，傳回值為一個MemberBean物件，
 	// 如果找不到對應的會員資料，傳回值為null。
@@ -358,6 +387,8 @@ public class MemberDaoImpl_Jdbc implements MemberDao {
 		tr.setSex(rs.getString("sex"));
 		return tr;
 	}
+
+	
 
 	
 

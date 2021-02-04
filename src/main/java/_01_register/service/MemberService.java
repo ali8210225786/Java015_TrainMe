@@ -10,6 +10,7 @@ import model.GymBean;
 
 public interface MemberService {
 	boolean idExists(String email);
+	boolean idNumberExists(String idNumber);
 	int checkverification(int gymId);
 	int saveStudent(StudentBean sb);
 	int saveTrainer(TrainerBean tr);

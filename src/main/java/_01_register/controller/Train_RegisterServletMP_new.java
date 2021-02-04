@@ -201,6 +201,14 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 					return;
 				}
 				
+				// 檢查身分證是否已經存在
+				if (service.idNumberExists(id)) {
+					errorMsg.put("tr_idNumberExists", "此身分證已經使用過囉");
+					errorResponse(request, response, errorMsg);
+					return;
+				}
+				
+				
 				// 檢查健身房驗證碼是否正確
 				if(service.checkverification(gymId) != gympassword) {
 					errorMsg.put("tr_errorverification", "驗證碼錯誤");

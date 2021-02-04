@@ -38,6 +38,11 @@ public class MemberServiceImpl implements MemberService {
 	public boolean idExists(String email) {
 		return dao.idExists(email);
 	}
+	
+	@Override
+	public boolean idNumberExists(String idNumber) {
+		return dao.idNumberExists(idNumber);
+	}
 
 //	@Override
 //	public void updateUnpaidOrderAmount(OrderBean ob) {
@@ -86,6 +91,8 @@ public class MemberServiceImpl implements MemberService {
 		
 		return dao.selectTrainer(email);
 	}
+
+
 	
 
 //	@Override

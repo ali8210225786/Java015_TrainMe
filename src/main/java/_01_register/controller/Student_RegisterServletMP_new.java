@@ -168,11 +168,23 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 			try {
 				MemberService service = new MemberServiceImpl();
 				
-		
+				// 檢查信箱是否已經存在
 				if (service.idExists(email)) {
 					errorMsg.put("st_errorIdDup", "此信箱已存在，請換新信箱");
-				} else {
+					errorResponse(request, response, errorMsg);
+					return;
+				}
+				
 
+				// 檢查身分證是否已經存在
+				if (service.idNumberExists(id)) {
+					errorMsg.put("st_idNumberExists", "此身分證已經使用過囉");
+					errorResponse(request, response, errorMsg);
+					return;
+				}
+				
+				
+				
 //=============================================================================================密碼加密					
 					// 為了配合Hibernate的版本。
 					// 要在此加密，不要在 dao.saveMember(mem)進行加密
@@ -197,7 +209,7 @@ public class Student_RegisterServletMP_new extends HttpServlet {
 					} else {
 						errorMsg.put("errorIdDup", "新增此筆資料有誤(RegisterServlet)");
 					}
-				}
+				
 
 				// 5.依照 Business Logic 運算結果來挑選適當的畫面
 				

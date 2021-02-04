@@ -602,6 +602,7 @@
                         <div class="group">
                             <label for="tr_id">身分證字號</label><br>
                             <input type="text" name="tr_id" class="input_field" placeholder="請輸入您的身分證字號" required>
+                            <label style = "font-size: 1px; color: red;">${MsgMap.tr_idNumberExists}</label>
                         </div>
                         <div class="group">
                             <label for="tr_birthday">生日</label><br>
@@ -706,6 +707,7 @@
                         <div class="group">
                             <label for="st_id">身分證字號</label><br>
                             <input type="text" name="st_id" class="input_field" placeholder="請輸入您的身分證字號" required>
+                            <label style = "font-size: 1px; color: red;">${MsgMap.st_idNumberExists}</label>
                         </div>
                         <div class="group">
                             <label for="st_birthday">生日</label><br>

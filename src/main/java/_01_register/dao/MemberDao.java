@@ -19,7 +19,7 @@ public interface MemberDao {
 	
 	public int saveTrainer(TrainerBean tr) ;
 	
-	
+	public boolean idNumberExists(String idNumber);
 	
 	public MemberBean queryStudent(String id);
 	
