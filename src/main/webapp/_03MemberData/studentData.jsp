@@ -74,13 +74,17 @@
 <div id="bigbox">
     <h1>學員個人資料</h1>
 
-    <!-- 用label包住<input>時，按label就等投於按input -->
-    <label>
-        <img src="/Shinnosuke/Shinnosuke1.jpg" alt="" id="photo">
-        <input type="file" accept="image/*" id="theFile"  class="fileInput"  value="" />
-        <!-- accept : 限制上傳檔案類型 -->
-    </label>
+    <form action="/trainme/Photo" method="post"  enctype="multipart/form-data">
 
+        <!-- 用label包住<input>時，按label就等投於按input -->
+        <label>
+            <img src="./images/1.jpg" alt="" id="photo" >
+            <input type="file" accept="image/*" id="theFile" name="photo" class="fileInput"  value="" />
+            <!-- accept : 限制上傳檔案類型 -->
+             <input type="submit" id="submitBt" />
+        </label>
+    </form>
+        
         <div class="memberDataBox">
         
         	<div class="stData">
@@ -97,27 +101,26 @@
 
                     <div class="memberDataBox">
                         <div class="memberDataLabel"><label for="txt_nickname">暱 稱：</label></div>
-                        <div class="mdiDiv"><input type="text" class="mdiInput" id="txt_nickname" value="${LoginOK.nickname}" /></div>
+                        <div class="mdiDiv"><input type="text" class="mdiInput" id="txt_nickname" name="nickname" value="${LoginOK.nickname}" /></div>
                     </div>
                     <div class="memberDataBox">
                         <div class="memberDataLabel"> <label for="txt_phone">電 話：</label></div>
-                        <div class="mdiDiv"> <input type="text" class="mdiInput"  id="txt_phone" required="required" value="${LoginOK.phone}" /></div>
+                        <div class="mdiDiv"> <input type="text" class="mdiInput"  id="txt_phone" name="phone" required="required" value="${LoginOK.phone}" /></div>
                     </div>
                     
                     <div class="memberDataBox">
                         <div class="memberDataLabel"> <label >地 址 : </label></div>
                         <div class="mdiDiv"> 
-                             <select name="city" id="city" class="mdiInput"  style=" width: 80px; height: 28px;">
+                             <select  id="city" name="city_id" class="mdiInput"  style=" width: 80px; height: 28px;">
                             	  <option value="0">請選擇</option>
                              </select>
-                             <select name="area" id="area" class="mdiInput" style="width: 80px; height: 28px;" >
-                              
-                            </select>
-                            <input type="text" class="mdiInput"  id="txt_add" value="${LoginOK.address}"  />
+                             <select  id="area" name="area_id" class="mdiInput" style="width: 80px; height: 28px;" >                              
+                             </select>
+                            <input type="text" class="mdiInput"  id="txt_add" name="address" value="${LoginOK.address}"  />
                         </div>
                     </div>
                    
-                         <button type="submit">傳送</button> 
+                        
                     <input type="submit" id="submitBt" />
                    
             </form>

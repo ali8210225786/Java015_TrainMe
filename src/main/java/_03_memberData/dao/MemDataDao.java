@@ -86,24 +86,34 @@ public class MemDataDao {
 	}
 
 	public int updateStudentData(StudentBean sb) {
-		int i = 0;
+		int result = 0;
 		String sql1 = "UPDATE  student "
-				+ " SET city_idt =  ?  , area_id = ? , address = ? , nickname = ? , profile_image = ?"
-				+ " WHERE memberId = ?";
-
-		try (Connection conn = ds.getConnection(); PreparedStatement ps1 = conn.prepareStatement(sql1);) {
+				+ " SET city_id =  ?  , area_id = ? , address = ? , nickname = ? , phone = ? "
+				+ " WHERE id = ?";
+		
+		try (Connection con = ds.getConnection(); 
+			PreparedStatement ps1 = con.prepareStatement(sql1);) {
 			ps1.setInt(1, sb.getCity_id());
 			ps1.setInt(2, sb.getArea_id());
 			ps1.setString(3,  sb.getAddress());
 			ps1.setString(4,  sb.getNickname());
-			ps1.setString(5,  sb.getPhoto());
-			ps1.executeUpdate();
-			i = 1;
+			ps1.setString(5,  sb.getPhone());
+			ps1.setInt(6, sb.getStNo());
+
+			result = ps1.executeUpdate();
+			
+			
+			if (result == 1) {
+				System.out.println(sb.getName() + " update successfully ");
+			} else {
+				System.out.println(sb.getName() + " gets wrong ");				
+			}
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			throw new RuntimeException("MemberDaoImpl_Jdbc類別#updateUnpaidOrderAmount()發生SQL例外: " + ex.getMessage());
 		}
-		return i;
+		return result;
 
 	}
 

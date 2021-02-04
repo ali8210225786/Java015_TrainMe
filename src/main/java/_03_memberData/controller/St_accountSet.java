@@ -31,6 +31,9 @@ public class St_accountSet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		// 文字資料轉內碼
+		request.setCharacterEncoding("UTF-8");
 		// 先取出session物件
 		// 要登入後才能使用的功能，要使用request.getSession(false);
 		HttpSession session = request.getSession(false);
@@ -43,7 +46,7 @@ public class St_accountSet extends HttpServlet {
 		Integer city_id = null;
 		Integer area_id = null;
 		String address = null;
-		String photo = null;
+		String phone = null;
 		String nickname = null;
 
 		Collection<Part> parts = request.getParts();
@@ -64,6 +67,8 @@ public class St_accountSet extends HttpServlet {
 						address = value;
 					} else if (fldName.equals("nickname")) {
 						nickname = value;
+					} else if (fldName.equals("phone")) {
+						phone = value;
 					}
 				}
 
@@ -74,6 +79,7 @@ public class St_accountSet extends HttpServlet {
 		sb.setArea_id(area_id);
 		sb.setAddress(address);
 		sb.setNickname(nickname);
+		sb.setPhone(phone);
 		
 		MemDataDao memDataDao = new MemDataDao();
 		
@@ -82,7 +88,7 @@ public class St_accountSet extends HttpServlet {
 		System.out.println(i);
 
 
-		response.sendRedirect("/_03MemberData/studentData.jsp");
+		response.sendRedirect("/trainme/_03MemberData/studentData.jsp");
 		return;
 	}
 
