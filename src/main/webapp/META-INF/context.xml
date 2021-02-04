@@ -5,7 +5,7 @@
 	
 
 	<Resource name="jdbc/BookDataMySQL" type="javax.sql.DataSource" 
-		username="root" password="root"
+		username="root" password="kevin8596"
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://localhost:3306/trainme?useUnicode=yes&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Taipei" 
 		maxTotal="8"

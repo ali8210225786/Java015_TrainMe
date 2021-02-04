@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.sql.Select;
+
 import _00_init.util.GlobalService;
 import _01_register.model.MemberBean;
 import _01_register.model.StudentBean;
@@ -97,9 +99,9 @@ public class LoginServlet_new extends HttpServlet {
 						}
 					// 教練 - 跳轉頁面
 						if(type == 2) {
-//							tb = (TrainerBean) mb;
+							tb = service.selectTrainer(email);
 							session.setAttribute("LoginOK", tb);
-							response.sendRedirect("/trainme/loginAfter.jsp");
+							response.sendRedirect("/trainme/tr_loginAfter.jsp");
 						}
 						return;	
 					}else {

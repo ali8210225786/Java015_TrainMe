@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import _00_init.util.DBService;
 import _01_register.model.StudentBean;
+import _01_register.model.TrainerBean;
 import model.AreaBean;
 import model.CityBean;
 import model.GymBean;
@@ -107,6 +108,38 @@ public class MemDataDao {
 				System.out.println(sb.getName() + " update successfully ");
 			} else {
 				System.out.println(sb.getName() + " gets wrong ");				
+			}
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("MemberDaoImpl_Jdbc類別#updateUnpaidOrderAmount()發生SQL例外: " + ex.getMessage());
+		}
+		return result;
+
+	}
+	public int updateTrainerData(TrainerBean tb) {
+		int result = 0;
+		String sql1 = "UPDATE  trainer "
+				+ " SET city_id =  ?  , area_id = ? , address = ? , nickname = ? , phone = ? , bank_account = ? "
+				+ " WHERE id = ?";
+		
+		try (Connection con = ds.getConnection(); 
+			PreparedStatement ps1 = con.prepareStatement(sql1);) {
+			ps1.setInt(1, tb.getCity_id());
+			ps1.setInt(2, tb.getArea_id());
+			ps1.setString(3,  tb.getAddress());
+			ps1.setString(4,  tb.getNickname());
+			ps1.setString(5,  tb.getPhone());
+			ps1.setString(6, tb.getBank_account());
+			ps1.setInt(7, tb.getTrNo());
+
+			result = ps1.executeUpdate();
+			
+			
+			if (result == 1) {
+				System.out.println(tb.getName() + " update successfully ");
+			} else {
+				System.out.println(tb.getName() + " gets wrong ");				
 			}
 			
 		} catch (SQLException ex) {
