@@ -92,9 +92,9 @@ public class LoginServlet_new extends HttpServlet {
 					if (mail.checkPass(type, email)) {
 
 						// 學生 - 跳轉頁面
-						if (type == 1) {
-
-							sb = service.selectStudent(email);
+//						if (type == 1) {
+//
+//							sb = service.selectStudent(email);
 						
 						
 					// 學生 - 跳轉頁面
@@ -116,7 +116,7 @@ public class LoginServlet_new extends HttpServlet {
 							response.sendRedirect("/trainme/loginAfter.jsp");
 						}
 						// 教練 - 跳轉頁面
-						if (type == 2) {
+//						if (type == 2) {
 //							tb = (TrainerBean) mb;
 					// 教練 - 跳轉頁面
 						if(type == 2) {

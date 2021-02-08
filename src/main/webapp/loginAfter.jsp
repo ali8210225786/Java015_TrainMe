@@ -9,13 +9,13 @@
 </head>
 <body>
 	<a href="<c:url value='/_03MemberData/studentData.jsp' />">
-		 �b���]�w
+		 帳號設定
 	</a>
 
-  	<a href="">�ӤH���</a>
-    <a href="<c:url value='/_06_st_point/money.jsp' />">�I�ƺ޲z</a>
-    <a href="<c:url value='/_06_st_point/st_point.jsp' />">�I�ƺ޲z2</a>
-  	<a href="">�b���]�w</a>
+  	<a href="">個人資料</a>
+    <a href="<c:url value='/_06_st_point/money.jsp' />">點數管理</a>
+    <a href="<c:url value='/_06_st_point/st_point.jsp' />">點數管理2</a>
+  	<a href="">帳號設定</a>
   	
   	
 
