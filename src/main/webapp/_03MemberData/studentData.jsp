@@ -107,7 +107,7 @@
 	
 				<!-- 用label包住<input>時，按label就等投於按input -->
 				<label> 
-					<img src="/trainme/images/${LoginOK.photo}" alt="" id="photo">
+					<img src="/upload/${LoginOK.photo}" alt="" id="photo">
 					<input type="file" accept="image/*" id="theFile" name="photo"
 					class="fileInput" value="" /> <!-- accept : 限制上傳檔案類型 --> 		
 				</label>

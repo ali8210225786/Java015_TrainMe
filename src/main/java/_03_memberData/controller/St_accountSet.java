@@ -123,7 +123,7 @@ public class St_accountSet extends HttpServlet {
 	private void write(Part photo,String filename, StudentBean sb) {  
 		System.out.println(filename);
 		int id = sb.getStNo();			 
-		String folderPath = String.format("C:/_Java015-TrainMe/_workspace_Test/Trainme/src/main/webapp/images/profile_photo/student/%s", id);
+		String folderPath = String.format("C:/_TraineMe/workspace/Java015_TrainMe/src/main/webapp/images/profile_photo/student/%s", id);
 		File theDir = new File(folderPath);
 		if (!theDir.exists()){
 		    theDir.mkdirs();
