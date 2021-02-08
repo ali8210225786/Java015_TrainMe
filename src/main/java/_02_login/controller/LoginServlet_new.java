@@ -2,16 +2,18 @@ package _02_login.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+
 
 import org.hibernate.sql.Select;
 
@@ -21,6 +23,9 @@ import _01_register.model.StudentBean;
 import _01_register.model.TrainerBean;
 import _01_register.service.MemberService;
 import _01_register.service.impl.MemberServiceImpl;
+import _04_Money2.dao.MemPointDao;
+import _04_Money2.model.CourseBean;
+import _04_Money2.model.MoneyBean;
 import mail.MailDao;
 
 @WebServlet("/tr-login.do")
@@ -74,16 +79,22 @@ public class LoginServlet_new extends HttpServlet {
 		try {
 			// 判斷帳號密碼是否存在
 			mb = service.checkIdPassword(email, password);
+
 		
 			// 若有找到帳號密碼
 			if (mb != null) {
-				
-				//判斷會員類別
-				
+
+				// 判斷會員類別
+
 				if (mb instanceof TrainerBean | mb instanceof StudentBean) {
-					int type =( mb instanceof TrainerBean )?  2 : 1;
-					
+					int type = (mb instanceof TrainerBean) ? 2 : 1;
+
 					if (mail.checkPass(type, email)) {
+
+						// 學生 - 跳轉頁面
+						if (type == 1) {
+
+							sb = service.selectStudent(email);
 						
 						
 					// 學生 - 跳轉頁面
@@ -91,8 +102,22 @@ public class LoginServlet_new extends HttpServlet {
 							
 							sb = (StudentBean) mb;
 							session.setAttribute("LoginOK", sb);
-							response.sendRedirect("/trainme/loginAfter.jsp");							
+							MemPointDao mpd = new MemPointDao();
+							List<MoneyBean> mnb = mpd.getMoneyDetail(sb.getStNo(), sb.getType());
+							List<CourseBean> cb=mpd.getCourseDetail(sb.getStNo());
+							int name = 0;
+							if (!(mnb == null)) {
+								session.setAttribute("MoneyBean", mnb);
+							}
+							if (!(cb == null)) {
+								session.setAttribute("CourseBean", cb);
+							}
+
+							response.sendRedirect("/trainme/loginAfter.jsp");
 						}
+						// 教練 - 跳轉頁面
+						if (type == 2) {
+//							tb = (TrainerBean) mb;
 					// 教練 - 跳轉頁面
 						if(type == 2) {
 
@@ -101,14 +126,19 @@ public class LoginServlet_new extends HttpServlet {
 							session.setAttribute("LoginOK", tb);
 							response.sendRedirect("/trainme/tr_loginAfter.jsp");
 						}
-						return;	
-					}else {
+						return;
+					} else {
 						errorMsg.put("noPass", "帳號尚未通過信箱驗證唷~");
 						errorResponse(request, response, errorMsg);
 						return;
-						
+
 					}
 				}
+
+				// 是否以經過信箱驗證
+
+				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"
+
 			}
 
 			// NG, 登入失敗, userid與密碼的組合錯誤，放相關的錯誤訊息到 errorMsgMap 之內
@@ -125,8 +155,8 @@ public class LoginServlet_new extends HttpServlet {
 	}
 
 	// 有錯誤時，回傳回原本頁面
-	private void errorResponse(HttpServletRequest request, HttpServletResponse response,
-			Map<String, String> errorMsg) throws ServletException, IOException {
+	private void errorResponse(HttpServletRequest request, HttpServletResponse response, Map<String, String> errorMsg)
+			throws ServletException, IOException {
 		errorMsg.put("from", "logIn");
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);

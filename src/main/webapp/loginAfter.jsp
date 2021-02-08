@@ -9,12 +9,13 @@
 </head>
 <body>
 	<a href="<c:url value='/_03MemberData/studentData.jsp' />">
-		 ±b¸¹³]©w
+		 ï¿½bï¿½ï¿½ï¿½]ï¿½w
 	</a>
 
-  	<a href="">­Ó¤H¸ê®Æ</a>
-    <a href="<c:url value='/_04_Money/money.jsp' />">ÂI¼ÆºÞ²z</a>
-  	<a href="">±b¸¹³]©w</a>
+  	<a href="">ï¿½Ó¤Hï¿½ï¿½ï¿½</a>
+    <a href="<c:url value='/_06_st_point/money.jsp' />">ï¿½Iï¿½ÆºÞ²z</a>
+    <a href="<c:url value='/_06_st_point/st_point.jsp' />">ï¿½Iï¿½ÆºÞ²z2</a>
+  	<a href="">ï¿½bï¿½ï¿½ï¿½]ï¿½w</a>
   	
   	
 
