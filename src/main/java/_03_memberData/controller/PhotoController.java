@@ -18,7 +18,7 @@ import javax.servlet.http.Part;
 @MultipartConfig(location = "", fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 1024 * 1024
 * 500, maxRequestSize = 1024 * 1024 * 500 * 5)
 @WebServlet("/Photo")
-public class Photo extends HttpServlet {
+public class PhotoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private final Pattern fileNameRegex = Pattern.compile("filename=\"(.*)\"");
 

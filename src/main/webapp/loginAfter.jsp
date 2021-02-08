@@ -13,7 +13,7 @@
 	</a>
 
   	<a href="">個人資料</a>
-    <a href="">點數管理</a>
+    <a href="<c:url value='/_04_Money/money.jsp' />">點數管理</a>
   	<a href="">帳號設定</a>
   	
   	

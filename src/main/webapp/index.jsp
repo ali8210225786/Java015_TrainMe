@@ -211,7 +211,7 @@
 
         .banner{
             position: relative;
-            background-image: url('./images/banner_192001.jpg');
+            background-image: url('./images/index/banner_192001.jpg');
             background-size: cover;
             background-position: center;
             height: 600px;
@@ -376,7 +376,7 @@
     <header id="navbar">
         <ul>
             <li class="logo">
-                <a href="#"><img src="./images/logo_black.png"></a>
+                <a href="#"><img src="./images/index/logo_black.png"></a>
             </li>
             <div class="items">
                 <li><a href="#">關於我們</a></li>
@@ -447,7 +447,7 @@
                             <p>(18)</p>
                         </span>
                     </div>
-                    <img src="./images/1.jpg">
+                    <img src="./images/index/1.jpg">
                 </div>
 
                 <div class="splide__slide">
@@ -465,7 +465,7 @@
                             <p>(18)</p>
                         </span>
                     </div>
-                    <img src="./images/2.png">
+                    <img src="./images/index/2.png">
                 </div>
 
                 <div class="splide__slide">
@@ -483,7 +483,7 @@
                             <p>(18)</p>
                         </span>
                     </div>
-                    <img src="./images/3.jpg">
+                    <img src="./images/index/3.jpg">
                 </div>
                 
                 <div class="splide__slide">
@@ -501,7 +501,7 @@
                             <p>(18)</p>
                         </span>
                     </div>
-                    <img src="./images/1.jpg">
+                    <img src="./images/index/1.jpg">
                 </div>
 
                 <div class="splide__slide">
@@ -537,7 +537,7 @@
                             <p>(18)</p>
                         </span>
                     </div>
-                    <img src="./images/3.jpg">
+                    <img src="./images/index/3.jpg">
                 </div>
                 
             </ul>
@@ -628,7 +628,7 @@
         <div id="lf" class="loginform">
             <form id="login" class="login_area" action="<c:url value='/tr-login.do' />" method="POST">
                 <div class="login_logo">
-                    <img src="images/logo_black.png" alt="Train Me" title="Train Me">
+                    <img src="images/index/logo_black.png" alt="Train Me" title="Train Me">
                 </div>
 
                 <h2>歡迎回來!</h2>

@@ -17,8 +17,7 @@ public interface MemberService {
 //	void updateUnpaidOrderAmount(OrderBean ob);
 	MemberBean queryMember(String id);
 	MemberBean checkIdPassword(String email, String password) ;
-	StudentBean selectStudent(String email);
-	TrainerBean selectTrainer(String email);
+	
 	
 	List<StudentBean> listAll();
 	List<GymBean> gymList();

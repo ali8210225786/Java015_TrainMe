@@ -139,7 +139,7 @@ public class Train_RegisterServletMP_new extends HttpServlet {
 
 			// 3. 檢查使用者輸入資料
 			if (name == null || name.trim().length() == 0) {
-				errorMsg.put("errorName", "姓名必須輸入");
+				errorMsg.put("errorName", "姓名必須輸入");  
 			}
 			if (phone == null || phone.trim().length() == 0) {
 				errorMsg.put("errorPhone", "電話必須輸入");

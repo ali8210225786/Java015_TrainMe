@@ -89,7 +89,7 @@ public class MemDataDao {
 	public int updateStudentData(StudentBean sb) {
 		int result = 0;
 		String sql1 = "UPDATE  student "
-				+ " SET city_id =  ?  , area_id = ? , address = ? , nickname = ? , phone = ? "
+				+ " SET city_id =  ?  , area_id = ? , address = ? , nickname = ? , phone = ? , profile_image = ?"
 				+ " WHERE id = ?";
 		
 		try (Connection con = ds.getConnection(); 
@@ -99,7 +99,8 @@ public class MemDataDao {
 			ps1.setString(3,  sb.getAddress());
 			ps1.setString(4,  sb.getNickname());
 			ps1.setString(5,  sb.getPhone());
-			ps1.setInt(6, sb.getStNo());
+			ps1.setString(6, sb.getPhoto());
+			ps1.setInt(7, sb.getStNo());
 
 			result = ps1.executeUpdate();
 			

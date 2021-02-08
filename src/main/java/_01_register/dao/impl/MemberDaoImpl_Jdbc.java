@@ -263,82 +263,6 @@ public class MemberDaoImpl_Jdbc implements MemberDao {
 		return gyms;
 	}
 	
-	
-	@Override
-	public StudentBean selectStudent(String email) {
-		StudentBean sb = null;
-		String sql = "SELECT * FROM student WHERE email = ?;";
-		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-			ps.setString(1, email);
-			try (ResultSet rs = ps.executeQuery();) {
-				while (rs.next()) {
-					sb = new StudentBean();
-					sb.setStNo(rs.getInt("id"));
-					sb.setType(rs.getInt("target_type"));
-					sb.setName(rs.getString("name"));
-					sb.setPhone(rs.getString("phone"));
-					sb.setBirth(rs.getDate("birthday"));
-					sb.setEmail(rs.getString("email"));
-					sb.setPassword(rs.getString("password"));
-					sb.setId(rs.getString("id_number"));
-					sb.setSex(rs.getString("sex"));
-					sb.setCity_id(rs.getInt("city_id"));
-					sb.setArea_id(rs.getInt("area_id"));
-					sb.setAddress(rs.getString("address"));
-					sb.setHeigth(rs.getDouble("heigth"));
-					sb.setWeight(rs.getDouble("weight"));
-					sb.setPhoto(rs.getString("profile_image"));
-					sb.setNickname(rs.getString("nickname"));
-					sb.setVerification(rs.getInt("verification"));
-					sb.setIs_delete(rs.getInt("is_delete"));
-				}
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl_Jdbc類別#selectStudent()發生SQL例外: " + ex.getMessage());
-		}
-		return sb;
-	}
-	
-
-	@Override
-	public TrainerBean selectTrainer(String email) {
-		TrainerBean tb = null;
-		String sql = "SELECT * FROM trainer WHERE email = ?;";
-		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-			ps.setString(1, email);
-			try (ResultSet rs = ps.executeQuery();) {
-				while (rs.next()) {
-					tb = new TrainerBean();
-					tb.setTrNo(rs.getInt("id"));
-					tb.setType(rs.getInt("target_type"));
-					tb.setName(rs.getString("name"));
-					tb.setPhone(rs.getString("phone"));
-					tb.setBirth(rs.getDate("birthday"));
-					tb.setEmail(rs.getString("email"));
-					tb.setPassword(rs.getString("password"));
-					tb.setId(rs.getString("id_number"));
-					tb.setSex(rs.getString("sex"));
-					tb.setGymId(rs.getInt("gym_id"));
-					tb.setYear(rs.getInt("year"));					
-					tb.setCity_id(rs.getInt("city_id"));
-					tb.setArea_id(rs.getInt("area_id"));
-					tb.setAddress(rs.getString("address"));
-					tb.setPhoto(rs.getString("profile_image"));
-					tb.setNickname(rs.getString("nickname"));
-					tb.setBank_account(rs.getString("bank_account"));
-					tb.setCourse(rs.getString("course"));
-					tb.setIntroduction(rs.getString("introduction"));
-					tb.setVerification(rs.getInt("verification"));
-					tb.setIs_delete(rs.getInt("is_delete"));
-				}
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl_Jdbc類別#selectTrainer()發生SQL例外: " + ex.getMessage());
-		}
-		return tb;
-	}
 
 //=========================================================================
 	@Override
@@ -363,8 +287,10 @@ public class MemberDaoImpl_Jdbc implements MemberDao {
 	}
 
 	public StudentBean setStudentBean(ResultSet rs) throws SQLException {
+		
 		StudentBean sb = new StudentBean();
 		sb.setStNo(rs.getInt("id"));
+		sb.setType(rs.getInt("target_type"));
 		sb.setName(rs.getString("name"));
 		sb.setPhone(rs.getString("phone"));
 		sb.setBirth(rs.getDate("birthday"));
@@ -372,20 +298,47 @@ public class MemberDaoImpl_Jdbc implements MemberDao {
 		sb.setPassword(rs.getString("password"));
 		sb.setId(rs.getString("id_number"));
 		sb.setSex(rs.getString("sex"));
+		sb.setCity_id(rs.getInt("city_id"));
+		sb.setArea_id(rs.getInt("area_id"));
+		sb.setAddress(rs.getString("address"));
+		sb.setHeigth(rs.getDouble("heigth"));
+		sb.setWeight(rs.getDouble("weight"));
+		sb.setPhoto(rs.getString("profile_image"));
+		sb.setNickname(rs.getString("nickname"));
+		sb.setVerification(rs.getInt("verification"));
+		sb.setIs_delete(rs.getInt("is_delete"));
 		return sb;
+		
 	}
 
 	public TrainerBean setTrainerBean(ResultSet rs) throws SQLException {
-		TrainerBean tr = new TrainerBean();
-		tr.setTrNo(rs.getInt("id"));
-		tr.setName(rs.getString("name"));
-		tr.setPhone(rs.getString("phone"));
-		tr.setBirth(rs.getDate("birthday"));
-		tr.setEmail(rs.getString("email"));
-		tr.setPassword(rs.getString("password"));
-		tr.setId(rs.getString("id_number"));
-		tr.setSex(rs.getString("sex"));
-		return tr;
+		
+
+		TrainerBean tb  = new TrainerBean();
+		tb.setTrNo(rs.getInt("id"));
+		tb.setType(rs.getInt("target_type"));
+		tb.setName(rs.getString("name"));
+		tb.setPhone(rs.getString("phone"));
+		tb.setBirth(rs.getDate("birthday"));
+		tb.setEmail(rs.getString("email"));
+		tb.setPassword(rs.getString("password"));
+		tb.setId(rs.getString("id_number"));
+		tb.setSex(rs.getString("sex"));
+		tb.setGymId(rs.getInt("gym_id"));
+		tb.setYear(rs.getInt("year"));					
+		tb.setCity_id(rs.getInt("city_id"));
+		tb.setArea_id(rs.getInt("area_id"));
+		tb.setAddress(rs.getString("address"));
+		tb.setPhoto(rs.getString("profile_image"));
+		tb.setNickname(rs.getString("nickname"));
+		tb.setBank_account(rs.getString("bank_account"));
+		tb.setCourse(rs.getString("course"));
+		tb.setIntroduction(rs.getString("introduction"));
+		tb.setVerification(rs.getInt("verification"));
+		tb.setIs_delete(rs.getInt("is_delete"));
+		
+		
+		return tb;
 	}
 
 	

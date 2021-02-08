@@ -1,4 +1,4 @@
-package _03_memberData.controller;
+package _04_Money.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,35 +12,36 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import _01_register.service.MemberService;
-import _01_register.service.impl.MemberServiceImpl;
 import _03_memberData.dao.MemDataDao;
+import _04_Money.dao.MoneyDao;
+import _04_Money.model.MoneyBean;
 import model.AreaBean;
-import model.GymBean;
 
 
-@WebServlet("/AreaList")
-public class Arealist extends HttpServlet {
+@WebServlet("/MoneyController")
+public class MoneyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+       
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8"); 
 		response.setContentType("application/json; charset=utf-8");
-
-//		String cityId = request.getParameter("cityId");
-		String cityId = request.getParameter("cityId");
-		System.out.println(cityId);
+//		System.out.println("=============");
+		String id = request.getParameter("id");
+		String type = request.getParameter("type");
+//		System.out.println(id + " , "+ type);
 		
-		MemDataDao dao = new MemDataDao();
-		List<AreaBean> area = dao.areaList(Integer.parseInt(cityId));
+	
+		MoneyDao dao = new MoneyDao();
+		List<MoneyBean> list = dao.moneyList(Integer.parseInt(id),Integer.parseInt(type));
 
 
 		
 		try (PrintWriter out = response.getWriter()){
 			
-			String areaList = new Gson().toJson(area);
+			String moneys = new Gson().toJson(list);
 			
-			out.write(areaList);
+			out.write(moneys);
 			out.flush();
 			
 		} catch (Exception e) {
@@ -49,7 +50,7 @@ public class Arealist extends HttpServlet {
 		
 	}
 
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}

@@ -74,11 +74,7 @@ public class LoginServlet_new extends HttpServlet {
 		try {
 			// 判斷帳號密碼是否存在
 			mb = service.checkIdPassword(email, password);
-			
-			
-			
-			
-			
+		
 			// 若有找到帳號密碼
 			if (mb != null) {
 				
@@ -91,15 +87,17 @@ public class LoginServlet_new extends HttpServlet {
 						
 						
 					// 學生 - 跳轉頁面
-						if(type == 1) {			
+						if(type == 1) {	
 							
-							sb = service.selectStudent(email);
+							sb = (StudentBean) mb;
 							session.setAttribute("LoginOK", sb);
 							response.sendRedirect("/trainme/loginAfter.jsp");							
 						}
 					// 教練 - 跳轉頁面
 						if(type == 2) {
-							tb = service.selectTrainer(email);
+
+							tb = (TrainerBean) mb;
+
 							session.setAttribute("LoginOK", tb);
 							response.sendRedirect("/trainme/tr_loginAfter.jsp");
 						}
@@ -111,13 +109,6 @@ public class LoginServlet_new extends HttpServlet {
 						
 					}
 				}
-				
-				
-				
-				// 是否以經過信箱驗證
-
-				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"
-
 			}
 
 			// NG, 登入失敗, userid與密碼的組合錯誤，放相關的錯誤訊息到 errorMsgMap 之內

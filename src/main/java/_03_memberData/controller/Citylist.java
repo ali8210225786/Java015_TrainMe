@@ -33,9 +33,9 @@ public class Citylist extends HttpServlet {
 		
 		try (PrintWriter out = response.getWriter()){
 		
-			String st = new Gson().toJson(city);
+			String cityList = new Gson().toJson(city);
 		
-			out.write(st);
+			out.write(cityList);
 			out.flush();
 			
 		} catch (Exception e) {

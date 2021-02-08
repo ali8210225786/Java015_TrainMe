@@ -16,7 +16,7 @@ import model.GymBean;
 
 public class MemberServiceImpl implements MemberService {
 	
-	SessionFactory factory;
+//	SessionFactory factory;
 	MemberDao dao;
 
 	public MemberServiceImpl() {
@@ -80,17 +80,6 @@ public class MemberServiceImpl implements MemberService {
 		return dao.checkverification(gymId);
 	}
 
-	@Override
-	public StudentBean selectStudent(String email) {
-		
-		return dao.selectStudent(email);
-	}
-
-	@Override
-	public TrainerBean selectTrainer(String email) {
-		
-		return dao.selectTrainer(email);
-	}
 
 
 	

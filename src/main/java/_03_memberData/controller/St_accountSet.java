@@ -1,7 +1,13 @@
 package _03_memberData.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,6 +29,7 @@ import _03_memberData.dao.MemDataDao;
 @WebServlet("/St_accountSet")
 public class St_accountSet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final Pattern fileNameRegex = Pattern.compile("filename=\"(.*)\"");
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -48,6 +55,8 @@ public class St_accountSet extends HttpServlet {
 		String address = null;
 		String phone = null;
 		String nickname = null;
+		Part photo = null;
+		String photoPath = null;
 
 		Collection<Part> parts = request.getParts();
 //		GlobalService.exploreParts(parts, request);
@@ -56,6 +65,11 @@ public class St_accountSet extends HttpServlet {
 			for (Part p : parts) {
 				String fldName = p.getName();
 				String value = request.getParameter(fldName);
+				if(fldName.equals("photo")) {
+					String filename = getSubmittedFileName(p);
+					write(p,filename, sb);
+					photoPath = "profile_photo/student/" + sb.getStNo() + "/"+ filename;
+				}
 
 				// 1. 讀取使用者輸入資料，進行必要的資料轉換
 				if (p.getContentType() == null) {
@@ -69,7 +83,7 @@ public class St_accountSet extends HttpServlet {
 						nickname = value;
 					} else if (fldName.equals("phone")) {
 						phone = value;
-					}
+					} 
 				}
 
 			}
@@ -80,6 +94,7 @@ public class St_accountSet extends HttpServlet {
 		sb.setAddress(address);
 		sb.setNickname(nickname);
 		sb.setPhone(phone);
+		sb.setPhoto(photoPath);
 		
 		MemDataDao memDataDao = new MemDataDao();
 		
@@ -90,6 +105,45 @@ public class St_accountSet extends HttpServlet {
 
 		response.sendRedirect("/trainme/_03MemberData/studentData.jsp");
 		return;
+	}
+	
+	
+	private String getSubmittedFileName(Part part) {
+		String header = part.getHeader("Content-Disposition");
+		Matcher matcher = fileNameRegex.matcher(header);
+		matcher.find();
+		
+		String filename = matcher.group(1);
+		if(filename.contains("\\")) {
+			return filename.substring(filename.lastIndexOf("\\") + 1);
+		}
+		return filename;
+	}
+	
+	private void write(Part photo,String filename, StudentBean sb) {  
+		System.out.println(filename);
+		int id = sb.getStNo();			 
+		String folderPath = String.format("C:/_Java015-TrainMe/_workspace_Test/Trainme/src/main/webapp/images/profile_photo/student/%s", id);
+		File theDir = new File(folderPath);
+		if (!theDir.exists()){
+		    theDir.mkdirs();
+		}
+		
+		try (InputStream in = photo.getInputStream();
+			 OutputStream out = new FileOutputStream(folderPath + "/" + filename)){
+			
+			byte[] buffer = new byte[1024];
+			int len = -1;
+			while ((len = in.read(buffer)) != -1) {
+				out.write(buffer, 0, len);
+				
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
