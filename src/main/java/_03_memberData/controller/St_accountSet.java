@@ -67,8 +67,10 @@ public class St_accountSet extends HttpServlet {
 				String value = request.getParameter(fldName);
 				if(fldName.equals("photo")) {
 					String filename = getSubmittedFileName(p);
-					write(p,filename, sb);
-					photoPath = "profile_photo/student/" + sb.getStNo() + "/"+ filename;
+					if(filename != "") {		
+						write(p,filename, sb);
+						photoPath = "profile_photo/student/" + sb.getStNo() + "/"+ filename;
+					}
 				}
 
 				// 1. 讀取使用者輸入資料，進行必要的資料轉換
@@ -88,19 +90,27 @@ public class St_accountSet extends HttpServlet {
 
 			}
 		}
+		MemDataDao memDataDao = new MemDataDao();
 		
 		sb.setCity_id(city_id);
 		sb.setArea_id(area_id);
 		sb.setAddress(address);
 		sb.setNickname(nickname);
 		sb.setPhone(phone);
-		sb.setPhoto(photoPath);
+		if (photoPath == null) {
+			
+			int i = memDataDao.updateStudentData(sb);
+			System.out.println(i);
+			
+		}else {
+			sb.setPhoto(photoPath);
+			int i = memDataDao.updateStudentDataPhoto(sb);
+			System.out.println(i);
+			
+		}
 		
-		MemDataDao memDataDao = new MemDataDao();
 		
-		int i = memDataDao.updateStudentData(sb);
 		
-		System.out.println(i);
 
 
 		response.sendRedirect("/trainme/_03MemberData/studentData.jsp");

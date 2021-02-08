@@ -89,7 +89,7 @@ public class MemDataDao {
 	public int updateStudentData(StudentBean sb) {
 		int result = 0;
 		String sql1 = "UPDATE  student "
-				+ " SET city_id =  ?  , area_id = ? , address = ? , nickname = ? , phone = ? , profile_image = ?"
+				+ " SET city_id =  ?  , area_id = ? , address = ? , nickname = ? , phone = ? "
 				+ " WHERE id = ?";
 		
 		try (Connection con = ds.getConnection(); 
@@ -99,8 +99,7 @@ public class MemDataDao {
 			ps1.setString(3,  sb.getAddress());
 			ps1.setString(4,  sb.getNickname());
 			ps1.setString(5,  sb.getPhone());
-			ps1.setString(6, sb.getPhoto());
-			ps1.setInt(7, sb.getStNo());
+			ps1.setInt(6, sb.getStNo());
 
 			result = ps1.executeUpdate();
 			
@@ -117,6 +116,38 @@ public class MemDataDao {
 		}
 		return result;
 
+	}
+	public int updateStudentDataPhoto(StudentBean sb) {
+		int result = 0;
+		String sql1 = "UPDATE  student "
+				+ " SET city_id =  ?  , area_id = ? , address = ? , nickname = ? , phone = ? , profile_image = ?"
+				+ " WHERE id = ?";
+		
+		try (Connection con = ds.getConnection(); 
+				PreparedStatement ps1 = con.prepareStatement(sql1);) {
+			ps1.setInt(1, sb.getCity_id());
+			ps1.setInt(2, sb.getArea_id());
+			ps1.setString(3,  sb.getAddress());
+			ps1.setString(4,  sb.getNickname());
+			ps1.setString(5,  sb.getPhone());
+			ps1.setString(6, sb.getPhoto());
+			ps1.setInt(7, sb.getStNo());
+			
+			result = ps1.executeUpdate();
+			
+			
+			if (result == 1) {
+				System.out.println(sb.getName() + " update successfully ");
+			} else {
+				System.out.println(sb.getName() + " gets wrong ");				
+			}
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("MemberDaoImpl_Jdbc類別#updateUnpaidOrderAmount()發生SQL例外: " + ex.getMessage());
+		}
+		return result;
+		
 	}
 	public int updateTrainerData(TrainerBean tb) {
 		int result = 0;
