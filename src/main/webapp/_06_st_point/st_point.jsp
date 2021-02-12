@@ -97,15 +97,14 @@
 					</c:if>
 					
 					<c:if test="${MoneyBean.get(i.current).changeAmount<0}">
-						<c:forEach varStatus="j" begin="0" end="${CourseBean.size()-1}">
-							<td>${CourseBean.get(j.current).date}</td>
-							<td>${CourseBean.get(j.current).skill}</td>
-							<td>${CourseBean.get(j.current).tainerName}</td>
-							<td>上課扣點</td>
-						</c:forEach>
+							<td>${CourseBean.get(0).date}</td>
+							<td>${CourseBean.get(0).skill}</td>
+							<td>${CourseBean.get(0).tainerName}</td>
+							<td>上課扣點</td>		
 					</c:if>
 					
-					<td>${MoneyBean.get(i.current).changeAmount}</td>
+						<td>${MoneyBean.get(i.current).changeAmount}</td>
+					
 				</tr>
 			</c:forEach>
 		</tbody>
