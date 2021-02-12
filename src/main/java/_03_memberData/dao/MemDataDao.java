@@ -112,7 +112,7 @@ public class MemDataDao {
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl_Jdbc類別#updateUnpaidOrderAmount()發生SQL例外: " + ex.getMessage());
+			throw new RuntimeException("MemberDaoImpl_Jdbc類別#updateStudentData()發生SQL例外: " + ex.getMessage());
 		}
 		return result;
 
@@ -176,10 +176,44 @@ public class MemDataDao {
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl_Jdbc類別#updateUnpaidOrderAmount()發生SQL例外: " + ex.getMessage());
+			throw new RuntimeException("MemberDaoImpl_Jdbc類別#updateTrainerData()發生SQL例外: " + ex.getMessage());
 		}
 		return result;
 
+	}
+	
+	public int updateTrainerDataPhoto(TrainerBean tb) {
+		int result = 0;
+		String sql1 = "UPDATE  trainer "
+				+ " SET city_id =  ?  , area_id = ? , address = ? , nickname = ? , phone = ? , profile_image = ?, bank_account = ?"
+				+ " WHERE id = ?";
+		
+		try (Connection con = ds.getConnection(); 
+				PreparedStatement ps1 = con.prepareStatement(sql1);) {
+			ps1.setInt(1, tb.getCity_id());
+			ps1.setInt(2, tb.getArea_id());
+			ps1.setString(3,  tb.getAddress());
+			ps1.setString(4,  tb.getNickname());
+			ps1.setString(5,  tb.getPhone());
+			ps1.setString(6, tb.getPhoto());
+			ps1.setString(7, tb.getBank_account());
+			ps1.setInt(8, tb.getTrNo());
+			
+			result = ps1.executeUpdate();
+			
+			
+			if (result == 1) {
+				System.out.println(tb.getName() + " update successfully ");
+			} else {
+				System.out.println(tb.getName() + " gets wrong ");				
+			}
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("MemberDaoImpl_Jdbc類別#updateTrainerDataPhoto()發生SQL例外: " + ex.getMessage());
+		}
+		return result;
+		
 	}
 
 }

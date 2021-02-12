@@ -1,148 +1,292 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<meta charset="UTF-8">
-<title>教練個人資料</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學員-帳號設定</title>
+    <link rel="stylesheet" href="../css/_03_MemberData/style.css">
+    <link rel="stylesheet" href="../css/_03_MemberData/style_st_profile.css">
+    <link rel="stylesheet" href="../css/_03_MemberData/style_st_account.css">
+    <link rel="stylesheet" href="../css/_03_MemberData/style_nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-  <style>
-    #bigbox{
-        border: 5px rgb(103, 202, 153) dashed;
-        border-radius: 30px;
-        width: 800px;
-        min-height: 1000px;
-        margin: 0 auto;
-        text-align: center;
-    }
-    #photo{
-        height: 150px;
-        width: 150px;
-        border: 3px rgb(0, 0, 0) solid;
-        border-radius: 50%;
-        margin: 30px;
-        text-align: center;
-        /* 出現手指按紐 */
-        cursor:pointer
-        
-    }
-    #theFile{         
-        display: none;
-    }
-    .memberDataBox{
-        margin: 10px;
-    }
-    .memberDataForm{
-        /* border: 3px rgb(251, 255, 16) solid; */
-        width: 100%; /* 表單寬度 */
-        line-height: 40px; /* 間距 */
-    }
-  
-  .memberDataLabel{
-    /* border: 3px rgb(255, 24, 24) solid; */
-    width: 100px;
-    display: inline-block;
-  
-  }
-  .mdiDiv{
-    /* border: 3px rgb(24, 255, 128) solid; */
-    min-width: 200px;
-    display: inline-block;
-  }
-  .mdiInput{
-    height: 20px;
-    border-radius: 20px;
-    outline:none;
-  }
-  #sex{
-      border: 2px rgb(0, 0, 0) solid;
-      width: 165px;
-      height: 25px;
-      padding: 0 0 0 70px;
-  }
-  #submitBt{
-      margin: 50px;
-      width: 80px;
-      height: 30px;
-      border-radius: 20px;
-  }
-
-
-</style>
 </head>
 <body>
-<div id="bigbox">
-    <h1>教練個人資料</h1>
+    <header id="navbar">
+        <ul>
+            <li class="logo">
+                <a href="./0.index_navUpdate.html"><img src="../images/_03_MemberData/logo_black.png"></a>
+            </li>
+                <div class="items">
+                    <li><a href="#">關於我們</a></li>
+                    <li><a href="#">尋找教練</a></li>
+                    <li><a href="#">購物商城</a></li>
+                    <li><a href="#">運動論壇</a></li>
+                </div>
+            <li>
+                <!-- <button class="nav_btn" onclick="Show();">登入/註冊</button> -->
+            </li>     
+            <li class="member">
+                <a href="#">
+                        <img src="../images/_03_MemberData/member.jpg">
+                </a>
+                <ul class="dropdown">
+                    <div class="triangle"></div>
+                    <div class="dropdown_box">
+                        <li><a href="#">個人資料</a></li>
+                        <li><a href="#">我的課程</a></li>
+                        <li><a href="#">我的點數</a></li>
+                        <li><a href="#">訂單查詢</a></li>
+                        <li><a href="#">帳號設定</a></li>
+                        <hr>
+                        <li><a href="#">登出</a></li>
+                    </div>
+                </ul>
+            </li>
+       
+    </header>
 
-    <form action="/trainme/Photo" method="post"  enctype="multipart/form-data">
+    <!-- 編輯資料 -->
 
-        <!-- 用label包住<input>時，按label就等投於按input -->
-        <label>
-            <img src="./images/1.jpg" alt="" id="photo" >
-            <input type="file" accept="image/*" id="theFile" name="photo" class="fileInput"  value="" />
-            <!-- accept : 限制上傳檔案類型 -->
-             <input type="submit" id="submitBt" />
-        </label>
-    </form>
-        
-        <div class="memberDataBox">
-        
-        	<div class="stData">
-                <p>姓名 :  <label>${LoginOK.name}</label></p>
-                <p>Email : <label>${LoginOK.email}</label></p>
-                <p>密碼 :  <label><a href="">修改密碼</a></label></p>
-                <p>生日 :  <label>${LoginOK.birth}</label></p>
-            </div>
-        
-        
-            <!-- 表單內有夾帶檔案要使用，enctype="multipart/form-data" 要求不進行URL編碼，避免破壞檔案組成結構 -->
-            <form action="/trainme/Tr_accountSet" method="post" class="memberDataForm" enctype="multipart/form-data">
-            																		
-
-                    <div class="memberDataBox">
-                        <div class="memberDataLabel"><label for="txt_nickname">暱 稱：</label></div>
-                        <div class="mdiDiv"><input type="text" class="mdiInput" id="txt_nickname" name="nickname" value="${LoginOK.nickname}" /></div>
-                    </div>
-                    <div class="memberDataBox">
-                        <div class="memberDataLabel"> <label for="txt_phone">電 話：</label></div>
-                        <div class="mdiDiv"> <input type="text" class="mdiInput"  id="txt_phone" name="phone" required="required" value="${LoginOK.phone}" /></div>
-                    </div>
-                    
-                    <div class="memberDataBox">
-                        <div class="memberDataLabel"> <label >地 址 : </label></div>
-                        <div class="mdiDiv"> 
-                             <select  id="city" name="city_id" class="mdiInput"  style=" width: 80px; height: 28px;">
-                            	  <option value="0">請選擇</option>
-                             </select>
-                             <select  id="area" name="area_id" class="mdiInput" style="width: 80px; height: 28px;" >                              
-                             </select>
-                            <input type="text" class="mdiInput"  id="txt_add" name="address" value="${LoginOK.address}"  />
-                        </div>
-                    </div>
-                   
-                    <div class="memberDataBox">
-                        <div class="memberDataLabel"><label for="txt_bank_account">帳 戶：</label></div>
-                        <div class="mdiDiv"><input type="text" class="mdiInput" id="txt_bank_account" name=bank_account value="${LoginOK.bank_account}" /></div>
-                    </div>
-                        
-                    <input type="submit" id="submitBt" />
-                   
-            </form>
-            
+    <div class="container">
+        <div class="aside">
+            <ul>
+                <li><a href="./st_info.html"><i class="fas fa-user-circle"></i>個人資料</a></li>
+                <li><a href="#"><i class="far fa-list-alt"></i></i>我的課程</a></li>
+                <li><a href="#"><i class="fas fa-coins"></i>我的點數</a></li>
+                <li><a href="#"><i class="fas fa-shopping-cart"></i>訂單查詢</a></li>
+                <li><a href="./st_info_account.html"><i class="fas fa-tools"></i>帳號設定</a></li>
+            </ul>
         </div>
-</div>
+
+
+
+        <div class="content">
+            <div class="title"><h3>帳號設定</h3></div>
+              
+
+                   <!-- 說明 -->
+
+                <div class="explain">
+                    <p>您在 Train Me 服務使用的基本資訊</p>
+                </div>
+                <div class="setting_area">
+                        <form action="/trainme/Tr_accountSet" method="post" enctype="multipart/form-data">
+                            <div class="setting_box">
+                                <label>姓名</label><p>${LoginOK.name}</p>
+                            </div>
+                            <div class="setting_box">
+                                <label>Email</label><p>${LoginOK.email}</p>
+                            </div>
+                            <div class="setting_box">
+                                <label>密碼</label><a href="./st_info_account_edit.html">修改密碼</a>
+                            </div>
+                            <div class="setting_box">
+                                <label>生日</label><p>${LoginOK.birth}</p>
+                            </div>
+                            <div class="setting_box">
+                                <label>健身房</label><p id="gym"></p>
+                            </div>
+                            <div class="setting_box">
+                                <label>手機</label>
+                                <input type="text" required name="phone" value="${LoginOK.phone}">
+                            </div>
+                            <div class="setting_box">
+                                <label>顯示暱稱</label>
+                                <input type="text" required name="nickname" value="${LoginOK.nickname}">
+                            </div>
+
+                            <div class="setting_box address">
+                                <label>地址</label>
+                                <select id="city"  name="city_id">
+                                    <option>選擇縣市</option>
+                            
+                                </select>
+                                
+                                
+                                <select id="area" name="area_id" placeholder="選擇地區">
+                                   
+                                </select>
+                            
+                                <input type="text" name="address" placeholder="地址" value="${LoginOK.address}">
+                            </div>
+                             <div class="setting_box">
+                                <label>銀行帳戶</label>
+                                <input type="text" required name="account" value="${LoginOK.bank_account}">
+                            </div>
+
+                            <div class="setting_box upload_file">
+                                <label>上傳相片</label>
+                                
+                                <div class="upload_file_area">
+                                    <div id="imgbox" class="ufl_box upload_imgbox">
+                                    
+                               		 <c:choose>
+									    <c:when test="${empty  LoginOK.photo}">
+									       <img id="photo"  src="../images/_03_MemberData/upimage.png">
+									    </c:when>    
+									    <c:otherwise>
+									       <img id="photo"  src="/upload/${LoginOK.photo}">
+									    </c:otherwise>
+									</c:choose>
+                                    
+                                    
+                                    </div>
+                                    <div class="ufl_box">
+                                        <p>從電腦中選取圖檔<br>
+                                            最佳大小為 250 x 250 px</p>    
+                                        <button type="button" class="upload_button">
+                                            <label>
+                                                <input type="file" accept="image/*" id="theFile" name="photo" /> <!-- accept : 限制上傳檔案類型 --> 	
+                                                上傳檔案
+                                            </label>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="edit_box e_button">
+                                <button class="save">更新</button>
+                            </div>
+                        </form>
+                    </div>
+
+                        
+                    </div>
+             </div>
+        </div>
+    
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    //送出表單
-    let submitBt = document.getElementById('submitBt');
-    submitBt.addEventListener('click',function () {
-        let form =document.forms[0];
-        form.submit();
-    })
 
-    //更換大頭照
-    let theFile = document.getElementById('theFile');
+//     // 非正方形圖檔置中待解決or是否要有裁切功能
+//     function doFirst(){
+//     document.getElementById('theFile').onchange = fileChange;
+//     }
+//     function fileChange(){
+//     let file = document.getElementById('theFile').files[0];
+//     let readFile = new FileReader();
+//     readFile.readAsDataURL(file);
+//     readFile.addEventListener('load',function(){
+//         let image = document.getElementById('image');
+//         let imgbox = document.getElementById('imgbox');
+//         image.src = this.result;
+//         image.style.maxWidth = '150px';
+//         image.style.maxHeight = '150px';
+
+//         imgbox.style.backgroundImage = 'none';
+//         });
+//     }
+//     window.addEventListener('load',doFirst);
+    
+    
+    var cityList = document.getElementById('city');
+    var areaList = document.getElementById('area');
+    var cityId = ${LoginOK.city_id};
+
+ // 縣市列表
+    axios.get("/trainme/CityList")
+    .then(function (res) {
+        var citys = res.data;
+        for(city of citys){
+			
+            var option = document.createElement("option");
+          
+            option.value = city.id;
+            option.innerHTML = city.name;
+            cityList.appendChild(option);
+        }
+       // 顯示資料庫內cityId對應的縣市
+        cityList.value = cityId;
+       
+    })
+    
+        
+    axios.get("/trainme/AreaList", {
+    	    params: {
+    	    	cityId: cityId
+    	    }})
+	    .then(function (res) {
+	        var areas = res.data;
+// 	        console.log(area);
+	        for(area of areas){
+
+            var option = document.createElement("option");
+            option.value = area.id;
+            option.innerHTML = area.name;
+            areaList.appendChild(option);
+        }
+	    // 顯示資料庫內area_id對應的行政區
+        areaList.value = ${LoginOK.area_id};
+//         console.log(areaList.value);
+
+    })
+        
+
+   
+	// 當選擇縣市時出現對應行政區
+    cityList.addEventListener("change",function (e) {
+    	
+		const cityId = e.target.value;
+		
+        var areaList = document.getElementById('area');
+        if(areaList.firstChild){
+        	areaList.innerHTML = "";
+        }
+
+        getAreaList(cityId);
+        
+    })
+    
+// 行政區列表
+    function getAreaList(cityId) {
+		
+        axios.get("/trainme/AreaList", {
+    	    params: {
+    	    	cityId: cityId
+    	    }})
+	    .then(function (res) {
+	        var areas = res.data;
+	        console.log(area);
+	        for(area of areas){
+
+	            var option = document.createElement("option");
+	            option.value = area.id;
+	            option.innerHTML = area.name;
+	            areaList.appendChild(option);
+      	    }
+
+   		 })
+	}
+
+ //  顯示資料庫內gym_id對應的健身房
+    	axios.get("/trainme/Gymlist")
+        .then(function (res) {   //若有抓到資料則執行這個function
+          var gyms = res.data;
+	        console.log(gyms.id);
+	        console.log(${LoginOK.gymId});
+	        console.log(gyms.id == ${LoginOK.gymId});
+	        for(gym of gyms){
+		        if(gym.id == ${LoginOK.gymId}){
+		        	console.log('ok');
+			        let tr_gym = document.getElementById('gym');
+			        tr_gym.innerHTML = gym.name
+	       		 }
+	        	
+	        }
+       	 })
+// 照片處理
+	
+    const theFile = document.getElementById('theFile');
+
+
+    
     theFile.addEventListener('change',function () {
+//     	console.log('ok');
         showImg(theFile);
   
     })
@@ -156,69 +300,15 @@
             let photo = document.getElementById('photo');
             //註冊load事件
             fr.addEventListener('load', function(e) {
-                 photo.src = e.target.result;
+                 photo.src = e.target.result;                 
             });
             //readAsDataURL去讀 file 把檔案轉成 URL
             fr.readAsDataURL(file);
-             
+            
     }
-
-    var cityList = document.getElementById('city');
-
-    axios.get("/trainme/CityList")
-    .then(function (res) {
-        var citys = res.data;
-        console.log(citys);
-        for(city of citys){
-
-            var option = document.createElement("option");
-            option.value = city.id;
-            option.innerHTML = city.name;
-            cityList.appendChild(option);
-        }
-
-    })
-
-    cityList.addEventListener("change",function (e) {
-    	
-		const cityId = e.target.value;
-		
-        var areaList = document.getElementById('area');
-        if(areaList.firstChild){
-//        		 console.log(areaList.firstChild);
-//             areaList.removeChild(areaList.firstChild);
-        	areaList.innerHTML = "";
-        }
-
-        axios.get("/trainme/AreaList", {
-        	    params: {
-        	    	cityId: cityId
-        	    }})
-        .then(function (res) {
-            var areas = res.data;
-            console.log(area);
-            for(area of areas){
-
-                var option = document.createElement("option");
-                option.value = area.id;
-                option.innerHTML = area.name;
-                areaList.appendChild(option);
-            }
-
-        })
-        
-    })
+             
     
-    
-    
-    
-
-  
-
 </script>
-  
 </body>
-</html>
 
-</body>
 </html>
