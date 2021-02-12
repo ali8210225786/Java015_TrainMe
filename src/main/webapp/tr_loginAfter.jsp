@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,6 +14,7 @@
 	</a>
 
   	<a href="">個人資料</a>
+    <a href="<c:url value='/_05_trainSchedule/timeOff.jsp' />">課程管理</a>
     <a href="">我的課程</a>
   	<a href="">我的點數</a>
   	<a href="">上課日誌</a>
