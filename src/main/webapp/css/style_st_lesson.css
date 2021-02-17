@@ -1,0 +1,32 @@
+.li_color{
+    color: #333;
+}
+a.active.nav-link{
+    background-color: #21d4a7!important;
+}
+
+.nav-pills li a:hover{
+  color: #21d4a7;
+}
+.nav-pills li a{
+    font-size: 16px;
+    font-weight: 500;
+}
+.tr_height tr td{
+    font-size: 16px;
+    padding: 20px;
+}
+
+.thead-light tr th{
+    padding: 20px;
+    text-align: center;
+}
+.tr_height td{
+    vertical-align: middle;
+    text-align: center;
+    height: 100px;
+    line-height: 1.6;
+}
+.tr_height td i{
+    font-size: 26px;
+}

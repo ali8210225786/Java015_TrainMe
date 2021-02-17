@@ -1,0 +1,23 @@
+.balance p{
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: 500;
+    color: #21d4a7;
+  }
+  .balance p, .balance button{
+    display:inline-block;
+    margin-right: 20px;
+  }
+  .df_btn{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: 'Noto Sans TC', Tahoma, Helvetica, sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+    background-color: #21d4a7;
+    color: #fff;
+  }
+  .df_btn:hover{
+    background-color: #29dfb1;
+  }

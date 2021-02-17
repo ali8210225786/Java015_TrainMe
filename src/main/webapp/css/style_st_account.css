@@ -1,9 +1,5 @@
-.aside ul li:nth-child(5) a{
-    color: #21d4a7;
-}
-
 .setting_area{
-    width: 700px;
+    width: 800px;
     border-radius: 10px;
     background-color: #fff;
     padding: 20px 20px;
@@ -63,21 +59,20 @@
 .ufl_box{
     margin: auto;
 }
-/* 銝s��� */
+/* 上傳頭像 */
 .upload_imgbox{
     width: 150px;
     height: 150px;
-    background-image: url('../../images/_03_MemberData/upimage.png');
+    background-image: url('../images/upimage.png');
     background-size: cover;
     border: 1px solid #ccc;
     display: block;
     overflow: hidden;
 }
 #photo{
-	height: 150px;
-	width: 150px;
+	 width: 150px;
+     height: 150px;
 }
-
 .upload_file{
     display: flex;
 }
@@ -110,7 +105,7 @@
     display: none;
 }
 
-/* ������ */
+/* 更新按紐 */
 .setting_area .e_button{
     width: 100%;
     text-align: right;

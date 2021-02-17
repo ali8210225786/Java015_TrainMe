@@ -1,0 +1,108 @@
+       /*教練推薦*/
+
+       .hot_trainer{
+        text-align: center; 
+        display:block;
+        margin: 20px 0px -10px;
+    }
+    .hot_trainer h3{
+        font-size: 18px;
+        text-align: center;
+        color: #666;
+        font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .splide{
+        margin: auto;
+        
+    }
+    .splide__slide{
+        position: relative;
+        /* width: 280px; */
+        height: 320px;
+        /* background-color: black; */
+        /* background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); */
+        box-shadow: 0px 0px 5px 0.6px #999;
+        
+    }
+    .splide__slide img{
+        width: 100%;
+        height: 100%;
+        /* opacity: 0.5; */
+    }
+
+    .splide__slide .p_t{
+        position: absolute;
+        
+        width: 100%;
+        bottom: 0px;
+        background-color: rgba(0,0,0,0.7);;
+        padding: 7px 0px 10px;
+        color: aliceblue;     
+        font-family: 'Noto Sans TC', sans-serif;       
+    }
+    .t_name{
+        font-size: 18px;
+        font-weight: 700;
+
+        text-align: center;
+        margin: 8px;
+    }
+    .p_t span{
+        display: flex;
+        justify-content: space-around;
+        /* padding: 5px; */
+        font-size: 13px;
+        margin: 0px 10px;
+    }
+    .p_t span i{
+        margin: 0px 10px 0px 0px ;
+    }
+
+    /* <p class="t_name">教練名稱</p>
+                <p class="t_location">地點</p>
+                <p class="t_ltimes">20次課程媒合</p> */
+
+    /*評價星星*/
+
+    .p_t span:nth-child(3) p{
+        /* vertical-align: middle; */
+        margin: 6px 0px 0px -80px;
+        font-size: 15px;
+    }
+
+    .ratings {
+        position: relative;
+        bottom: 20%;
+        left: 4%;
+        vertical-align: middle;
+        display: inline-block;
+        color: #b1b1b1;
+        overflow: hidden;
+    }
+    .full-stars {
+        position: absolute;
+        left: 0;
+        top: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #fde16d;
+    }
+    .empty-stars:before, .full-stars:before {
+        content:"\2605\2605\2605\2605\2605";
+        font-size: 15pt;
+    }
+    .empty-stars:before {
+        -webkit-text-stroke: 1px #848484;
+    }
+    .full-stars:before {
+        -webkit-text-stroke: 1px orange;
+    }
+    /* Webkit-text-stroke is not supported on firefox or IE */
+
+    /* Firefox */
+    @-moz-document url-prefix() {
+        .full-stars {
+            color: #ECBE24;
+        }
+    }

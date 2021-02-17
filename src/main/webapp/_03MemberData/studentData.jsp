@@ -8,60 +8,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>學員-帳號設定</title>
-    <link rel="stylesheet" href="../css/_03_MemberData/style.css">
-    <link rel="stylesheet" href="../css/_03_MemberData/style_st_profile.css">
-    <link rel="stylesheet" href="../css/_03_MemberData/style_st_account.css">
-    <link rel="stylesheet" href="../css/_03_MemberData/style_nav.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style_st_info.css">
+    <link rel="stylesheet" href="../css/style_st_account.css">
+    <link rel="stylesheet" href="../css/style_nav.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+
+	    <!-- 暫時代替側邊選單點擊變色的功能的CSS -->    
+    <style>
+        .aside ul li:nth-child(6) a{
+                color: #21d4a7;
+            }
+    </style>
 </head>
 <body>
-    <header id="navbar">
-        <ul>
-            <li class="logo">
-                <a href="./0.index_navUpdate.html"><img src="../images/_03_MemberData/logo_black.png"></a>
-            </li>
-                <div class="items">
-                    <li><a href="#">關於我們</a></li>
-                    <li><a href="#">尋找教練</a></li>
-                    <li><a href="#">購物商城</a></li>
-                    <li><a href="#">運動論壇</a></li>
-                </div>
-            <li>
-                <!-- <button class="nav_btn" onclick="Show();">登入/註冊</button> -->
-            </li>     
-            <li class="member">
-                <a href="#">
-                        <img src="../images/_03_MemberData/member.jpg">
-                </a>
-                <ul class="dropdown">
-                    <div class="triangle"></div>
-                    <div class="dropdown_box">
-                        <li><a href="#">個人資料</a></li>
-                        <li><a href="#">我的課程</a></li>
-                        <li><a href="#">我的點數</a></li>
-                        <li><a href="#">訂單查詢</a></li>
-                        <li><a href="#">帳號設定</a></li>
-                        <hr>
-                        <li><a href="#">登出</a></li>
-                    </div>
-                </ul>
-            </li>
+  <!-- ============上方導覽列======================================================= -->
+   <jsp:include page="/fragment/nav_st.jsp"/>  
+   
+<!--     <header id="navbar"> -->
+<!--         <ul> -->
+<!--             <li class="logo"> -->
+<!--                 <a href="./0.index_navUpdate.html"><img src="../images/_03_MemberData/logo_black.png"></a> -->
+<!--             </li> -->
+<!--                 <div class="items"> -->
+<!--                     <li><a href="#">關於我們</a></li> -->
+<!--                     <li><a href="#">尋找教練</a></li> -->
+<!--                     <li><a href="#">購物商城</a></li> -->
+<!--                     <li><a href="#">運動論壇</a></li> -->
+<!--                 </div> -->
+<!--             <li> -->
+<!--                 <button class="nav_btn" onclick="Show();">登入/註冊</button> -->
+<!--             </li>      -->
+<!--             <li class="member"> -->
+<!--                 <a href="#"> -->
+<!--                         <img src="../images/_03_MemberData/member.jpg"> -->
+<!--                 </a> -->
+<!--                 <ul class="dropdown"> -->
+<!--                     <div class="triangle"></div> -->
+<!--                     <div class="dropdown_box"> -->
+<!--                         <li><a href="#">個人資料</a></li> -->
+<!--                         <li><a href="#">我的課程</a></li> -->
+<%--                         <li><a href="<c:url value='/_06_st_point/st_point.jsp' />">我的點數</a></li> --%>
+<!--                         <li><a href="#">訂單查詢</a></li> -->
+<%--                         <li><a href="<c:url value='/_03MemberData/studentData.jsp' />">帳號設定</a></li> --%>
+<!--                         <hr> -->
+<!--                         <li><a href="#">登出</a></li> -->
+<!--                     </div> -->
+<!--                 </ul> -->
+<!--             </li> -->
        
-    </header>
+<!--     </header> -->
 
     <!-- 編輯資料 -->
 
     <div class="container">
-        <div class="aside">
-            <ul>
-                <li><a href="./st_info.html"><i class="fas fa-user-circle"></i>個人資料</a></li>
-                <li><a href="#"><i class="far fa-list-alt"></i></i>我的課程</a></li>
-                <li><a href="#"><i class="fas fa-coins"></i>我的點數</a></li>
-                <li><a href="#"><i class="fas fa-shopping-cart"></i>訂單查詢</a></li>
-                <li><a href="./st_info_account.html"><i class="fas fa-tools"></i>帳號設定</a></li>
-            </ul>
-        </div>
+     <!-- ============左側選單======================================================= -->
+       <jsp:include page="/fragment/sidebar_st.jsp"/>
+       
+       
+       
+<!--         <div class="aside"> -->
+<!--             <ul> -->
+<!--                 <li><a href="#"><i class="fas fa-user-circle"></i>個人資料</a></li> -->
+<!--                 <li><a href="#"><i class="far fa-list-alt"></i></i>我的課程</a></li> -->
+<%--                 <li><a href="<c:url value='/_06_st_point/st_point.jsp' />"><i class="fas fa-coins"></i>我的點數</a></li> --%>
+<!--                 <li><a href="#"><i class="fas fa-shopping-cart"></i>訂單查詢</a></li> -->
+<%--                 <li><a href="<c:url value='/_03MemberData/studentData.jsp' />"><i class="fas fa-tools"></i>帳號設定</a></li> --%>
+<!--             </ul> -->
+<!--         </div> -->
 
 
 
@@ -83,7 +98,7 @@
                                 <label>Email</label><p>${LoginOK.email}</p>
                             </div>
                             <div class="setting_box">
-                                <label>密碼</label><a href="./st_info_account_edit.html">修改密碼</a>
+                                <label>密碼</label><a href="<c:url value='/_03MemberData/passwordUpdate.jsp' />">修改密碼</a>
                             </div>
                             <div class="setting_box">
                                 <label>生日</label><p>${LoginOK.birth}</p>
