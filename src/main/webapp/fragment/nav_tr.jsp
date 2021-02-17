@@ -20,7 +20,7 @@
                     <li><a href="#">運動論壇</a></li>
                 </div>
             <li>
-                <button class="nav_btn" onclick="Show();">登出</button>
+                <button class="nav_btn" id="logout_btn">登出</button>
             </li>     
             <li class="member">
                 <a href="#">
@@ -56,5 +56,11 @@
         }
         prevScrollpos = currentScrollPos;
         } 
+        
+        
+        var logout_btn = document.getElementById('logout_btn');
+        logout_btn.addEventListener('click',function () {
+		window.location.href="<c:url value='/Logout' />";		
+        })
 
 </script>

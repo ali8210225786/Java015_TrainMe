@@ -64,9 +64,7 @@
 
         var logout_btn = document.getElementById('logout_btn');
         logout_btn.addEventListener('click',function () {
-//             alert('AAA')
-		window.location.href="<c:url value='/index.jsp' />";
-		
+		window.location.href="<c:url value='/Logout' />";		
         })
 
 </script>
