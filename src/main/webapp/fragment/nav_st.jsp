@@ -65,8 +65,6 @@
         var logout_btn = document.getElementById('logout_btn');
         logout_btn.addEventListener('click',function () {
 //             alert('AAA')
-		<!-- 移除放在session物件內的屬性物件 -->
-		<c:remove var="LoginOK" scope="session" />
 		window.location.href="<c:url value='/index.jsp' />";
 		
         })

@@ -102,6 +102,7 @@ public class LoginServlet_new extends HttpServlet {
 							
 							sb = (StudentBean) mb;
 							session.setAttribute("LoginOK", sb);
+							
 							MemPointDao mpd = new MemPointDao();
 							List<MoneyBean> mnb = mpd.getMoneyDetail(sb.getStNo(), sb.getType());
 							List<CourseBean> cb=mpd.getCourseDetail(sb.getStNo());
@@ -113,7 +114,7 @@ public class LoginServlet_new extends HttpServlet {
 								session.setAttribute("CourseBean", cb);
 							}
 
-							response.sendRedirect("/trainme/loginAfter.jsp");
+							response.sendRedirect("/trainme/index.jsp");
 						}
 						// 教練 - 跳轉頁面
 //						if (type == 2) {
@@ -124,7 +125,9 @@ public class LoginServlet_new extends HttpServlet {
 							tb = (TrainerBean) mb;
 
 							session.setAttribute("LoginOK", tb);
-							response.sendRedirect("/trainme/tr_loginAfter.jsp");
+						
+							
+							response.sendRedirect("/trainme/index.jsp");
 						}
 						return;
 					} else {
