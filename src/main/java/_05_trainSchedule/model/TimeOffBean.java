@@ -17,6 +17,8 @@ public class TimeOffBean {
 		this.date = date;
 		this.time = time;
 	}
+	
+	public TimeOffBean() {}
 
 	public Integer getId() {
 		return id;

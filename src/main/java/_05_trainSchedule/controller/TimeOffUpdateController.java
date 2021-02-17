@@ -29,8 +29,10 @@ import _05_trainSchedule.service.TimeOffService;
 /**
  * Servlet implementation class TimeOff
  */
-@WebServlet("/TimeOff")
-public class TimeOff extends HttpServlet {
+@WebServlet("/TimeOff/update")
+public class TimeOffUpdateController extends HttpServlet {
+
+
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -72,12 +74,6 @@ public class TimeOff extends HttpServlet {
 		
 		JsonResponseService.responseMessage(response, "okkk");
 		
-		
-		
-		
-
-		
-
 	}
 
 }

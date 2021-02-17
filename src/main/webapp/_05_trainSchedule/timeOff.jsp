@@ -138,10 +138,10 @@
     <script>
       function courseData() {
         return {
-          dateBegin: '2020-02-10',
+          dateBegin: null,
           dateEnd: null,
-          timeBegin: 8,
-          timeEnd: 12,
+          timeBegin: null,
+          timeEnd: null,
           dates: [],
           hours: [],
           dateBodys: [],
@@ -151,6 +151,7 @@
             todayStr = today.format("YYYY-MM-DD");
             // console.log($refs.date);
             $refs.date.min = todayStr;
+           
           },
           notAllowGenerate() {   //判斷資料是否有輸入
             return (
@@ -160,7 +161,7 @@
             );
           },
           produceDate() {    //產生行程表
-            this.resetData();
+        	  this.resetData();
             this.produceDateTitle();
             this.produceHourData();
           },
@@ -180,16 +181,25 @@
               this.dates.push(dateStr);
               this.dateBodys.push(dateStr);
             }
+            
+            
           },
           produceHourData() {   //產生小時列表
             let firstTime = parseInt(this.timeBegin);
             let lastTime = parseInt(this.timeEnd);
             
-
             for (firstTime; firstTime <= lastTime; firstTime++) {           
               this.hours.push(firstTime);
             }
-
+            const data = {dateBegin:this.dateBegin , dateEnd:this.dateEnd}
+            
+            const self = this;
+            $.get("/trainme/TimeOff/get",data,
+              function (data, textStatus, jqXHR) {
+            	self.closeHours = data;
+              },
+              "json"
+            );
           },
           isClosed(closeHour) {   //判斷時段是否已經關閉
             const closeHourStr = closeHour.dateBody + "_" + closeHour.hour;
@@ -222,8 +232,8 @@
             }
              
           },
-          save(){
-        	  const hourData = this.closeHours.map(hour => hour);
+          save(){  // 先刪除時間內的所有資料，再存新資料
+        	  const hourData = this.closeHours.map(hour => hour); //解開包住物件得
         	  const payload = {
               closeHour: hourData,
               dateBegin: this.dateBegin,
@@ -231,7 +241,7 @@
             };
 
         
-            $.post("/trainme/TimeOff", {data:JSON.stringify(payload)},
+            $.post("/trainme/TimeOff/update", {data:JSON.stringify(payload)},
               function (data, textStatus, jqXHR) {
                 console.log(data);
               },
