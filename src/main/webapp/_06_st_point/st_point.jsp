@@ -113,9 +113,9 @@
 
 			<div class="balance">
 				<p>
-					<i class="fas fa-coins"></i> 目前餘額 : <span>1500</span> 點
+					<i class="fas fa-coins"></i> 目前餘額 : <span>${MoneyBean.get((MoneyBean.size()-1)).total}</span> 點
 				</p>
-				<button class="df_btn">我要儲值</button>
+				<button class="df_btn"><a href="st_add_point.jsp">我要儲值</a></button>
 			</div>
 			<!-- ============即將開始的課程======================================================= -->
 

@@ -12,6 +12,9 @@ public class CourseBean {
 Date date;
 String skill;
 String tainerName;
+int isAllowed;
+int isExecuted;
+int price;
 List<CourseBean> coursebean= new ArrayList<>();
 
 
@@ -22,6 +25,50 @@ public CourseBean(Date date, String skill, String tainerName, List<CourseBean> c
 	this.skill = skill;
 	this.tainerName = tainerName;
 	this.coursebean = coursebean;
+}
+
+
+public CourseBean(Date date, String skill, String tainerName, int isAllowed, int isExecuted, int price,
+		List<CourseBean> coursebean) {
+	super();
+	this.date = date;
+	this.skill = skill;
+	this.tainerName = tainerName;
+	this.isAllowed = isAllowed;
+	this.isExecuted = isExecuted;
+	this.price = price;
+	this.coursebean = coursebean;
+}
+
+
+public int getIsExecuted() {
+	return isExecuted;
+}
+
+
+public void setIsExecuted(int isExecuted) {
+	this.isExecuted = isExecuted;
+}
+
+
+public int getPrice() {
+	return price;
+}
+
+
+
+public void setPrice(int price) {
+	this.price = price;
+}
+
+
+
+public int getIsAllowed() {
+	return isAllowed;
+}
+
+public void setIsAllowed(int isAllowed) {
+	this.isAllowed = isAllowed;
 }
 
 public List<CourseBean> getCoursebean() {

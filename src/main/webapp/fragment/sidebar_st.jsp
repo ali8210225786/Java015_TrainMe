@@ -7,8 +7,8 @@
 	
         <li class="mypage_title">我的主頁</li>
         <li><a id="a" href="#"><i class="fas fa-user-circle"></i>個人資料</a></li>
-        <li><a id="a" href="#"><i class="far fa-list-alt"></i>我的課程</a></li>
-        <li><a id="a" href="<c:url value='/_06_st_point/st_point.jsp' />"><i class="fas fa-coins"></i>我的點數</a></li>
+        <li><a id="a" href="<c:url value='/_07_studentLesson/CourseDetail.do' />"><i class="far fa-list-alt"></i>我的課程</a></li>
+        <li><a id="a" href="<c:url value='/_04_Money2/PointDetail.do' />"><i class="fas fa-coins"></i>我的點數</a></li>
         <li><a id="a" href="#"><i class="fas fa-shopping-cart"></i>訂單查詢</a></li>
         <li><a id="a" href="<c:url value='/_03MemberData/studentData.jsp' />"><i class="fas fa-tools"></i>帳號設定</a></li>
 	</ul>

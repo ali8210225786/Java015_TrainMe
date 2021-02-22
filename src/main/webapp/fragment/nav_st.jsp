@@ -32,8 +32,8 @@
                     <div class="triangle"></div>
                     <div class="dropdown_box">
                         <li><a href="#">個人資料</a></li>
-                        <li><a href="#">我的課程</a></li>
-                        <li><a href="<c:url value='/_06_st_point/st_point.jsp' />">我的點數</a></li>
+                        <li><a href="<c:url value='/_07_studentLesson/CourseDetail.do' />">我的課程</a></li>
+                        <li><a href="<c:url value='/_04_Money2/PointDetail.do' />">我的點數</a></li>
                         <li><a href="#">訂單查詢</a></li>
                         <li><a href="<c:url value='/_03MemberData/studentData.jsp' />">帳號設定</a></li>
                         <hr>
