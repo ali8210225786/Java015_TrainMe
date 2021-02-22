@@ -102,18 +102,6 @@ public class LoginServlet_new extends HttpServlet {
 							
 							sb = (StudentBean) mb;
 							session.setAttribute("LoginOK", sb);
-							
-							MemPointDao mpd = new MemPointDao();
-							List<MoneyBean> mnb = mpd.getMoneyDetail(sb.getStNo(), sb.getType());
-							List<CourseBean> cb=mpd.getCourseDetail(sb.getStNo());
-							int name = 0;
-							if (!(mnb == null)) {
-								session.setAttribute("MoneyBean", mnb);
-							}
-							if (!(cb == null)) {
-								session.setAttribute("CourseBean", cb);
-							}
-
 							response.sendRedirect("/trainme/index.jsp");
 						}
 						// 教練 - 跳轉頁面
